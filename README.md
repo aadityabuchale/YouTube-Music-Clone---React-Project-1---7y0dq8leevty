@@ -14,7 +14,7 @@ And the last input should be a slider input(with id ="fontSize-input") for takin
 
 Apply the fontSize property to the textarea element.
 
-
+7y0dq8leevty
 
 Demo video:-
 <video src="https://d3dyfaf3iutrxo.cloudfront.net/general/upload/e449406acecb4a1186ae9cc77a55933f.mp4" controls autoplay muted>

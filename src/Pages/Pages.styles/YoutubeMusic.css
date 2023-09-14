@@ -1,0 +1,8 @@
+.youtube-music-app {
+    height: 100vh;
+    width: 100%;
+    background-color: #050913;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}

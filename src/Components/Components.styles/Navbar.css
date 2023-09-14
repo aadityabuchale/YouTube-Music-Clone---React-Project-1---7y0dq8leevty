@@ -1,0 +1,46 @@
+.navbar {
+    color: white;
+    font-size: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    border-right: 0.8px solid #2a2a2a;
+    /* background-color: red; */
+    width: 18%;
+}
+
+.nav-item {
+    padding: 0.625rem;
+    padding-left: 3rem;
+    display: flex;
+    gap: 1rem;
+    /* background-color: red; */
+    font-weight: 400;
+    font-size: 16px;
+    border-radius: 0.375rem;
+    width: fit-content;
+    padding-right: 5.75rem;
+}
+
+.header-1 {
+    display: flex;
+    gap: 20px;
+}
+
+.nav-item:last-child {
+    gap: 0.8rem;
+}
+
+.nav-item-collapse {
+    display: flex;
+    padding-left: 1rem;
+    flex-direction: column;
+    justify-content: flex-start;
+    /* background-color: rebeccapurple; */
+    align-items: center;
+    gap: 0.8rem;
+    padding-right: 1rem;
+    font-size: 12px;
+    width: fit-content;
+    margin-bottom: 5px;
+}
