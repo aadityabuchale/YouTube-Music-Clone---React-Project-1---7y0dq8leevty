@@ -1,0 +1,27 @@
+.artists-like-container {
+    width: 90%;
+    height: 12vmax;
+    display: flex;
+    justify-content: center;
+    /* background-color: red; */
+    color: var(--text-color);
+    margin-top: 50px;
+}
+
+.artists-like-container img {
+    width: 60%;
+    height: 95%;
+}
+
+.info-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-left: 20px;
+    margin-top: 20px;
+}
+
+.info-container div {
+    font-weight: 700;
+    font-size: 22px;
+}

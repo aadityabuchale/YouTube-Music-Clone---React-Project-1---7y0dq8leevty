@@ -1,50 +1,34 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import HomeSharpIcon from "@mui/icons-material/HomeSharp";
 import ExploreIcon from "@mui/icons-material/Explore";
 import LibraryMusicSharpIcon from "@mui/icons-material/LibraryMusicSharp";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
-
+import { AppContext } from "../Pages/AppContext";
 import "./Components.styles/Navbar.css";
 
 function Navbar() {
     const [navExpanded, setNavExpanded] = useState(true);
+    const { selectedNavItem, setSelectedNavItem } = useContext(AppContext);
 
-    let navStyle = navExpanded ? "nav-item" : "nav-item-collapse";
-    let navbarStyle = navExpanded
-        ? {}
-        : { borderRight: "transparent", width: "15%" };
-
-    return (
-        <nav className={"navbar"} style={navbarStyle}>
-            <div className="header-1 nav-item">
-                <MenuOutlinedIcon
-                    className=" text-white"
-                    onClick={() => setNavExpanded((expanded) => !expanded)}
-                ></MenuOutlinedIcon>
-
-                <img
-                    src="./images/on_platform_logo_dark.svg"
-                    sx={{ height: "70%" }}
-                    alt="logo img"
-                />
-            </div>
-
-            <div className={navStyle}>
-                <HomeSharpIcon />
-                <span>Home</span>
-            </div>
-
-            <div className={navStyle}>
-                <ExploreIcon />
-                <span>Explore</span>
-            </div>
-
-            <div className={navStyle}>
-                <LibraryMusicSharpIcon />
-                <span>Library</span>
-            </div>
-
-            <div className={navStyle}>
+    const navArray = [
+        {
+            name: "Home",
+            icon: <HomeSharpIcon />,
+            isClicked: selectedNavItem === "Home",
+        },
+        {
+            name: "Explore",
+            icon: <ExploreIcon />,
+            isClicked: selectedNavItem === "Explore",
+        },
+        {
+            name: "Library",
+            icon: <LibraryMusicSharpIcon />,
+            isClicked: selectedNavItem === "Library",
+        },
+        {
+            name: "Upgrade",
+            icon: (
                 <svg
                     viewBox="0 0 24 24"
                     preserveAspectRatio="xMidYMid meet"
@@ -64,8 +48,45 @@ function Navbar() {
                         ></path>
                     </g>
                 </svg>
-                <span>Upgrade</span>
+            ),
+            isClicked: selectedNavItem === "Upgrade",
+        },
+    ];
+
+    let navStyle = navExpanded ? "nav-item" : "nav-item-collapse";
+    let navbarStyle = navExpanded
+        ? {}
+        : { borderRight: "transparent", width: "10%" };
+
+    const handleNavClick = (name) => {
+        setSelectedNavItem(name);
+    };
+
+    return (
+        <nav className={"navbar"} style={navbarStyle}>
+            <div className="header-1 nav-item-logo">
+                <MenuOutlinedIcon
+                    onClick={() => setNavExpanded((expanded) => !expanded)}
+                ></MenuOutlinedIcon>
+
+                <img src="./images/on_platform_logo_dark.svg" alt="logo-img" />
             </div>
+
+            {navArray.map((item, index) => (
+                <div
+                    key={index}
+                    className={navStyle}
+                    style={{
+                        backgroundColor: item.isClicked
+                            ? "#1e1e1e"
+                            : "var(--primary-color)",
+                    }}
+                    onClick={() => handleNavClick(item.name)}
+                >
+                    {item.icon}
+                    <span>{item.name}</span>
+                </div>
+            ))}
         </nav>
     );
 }

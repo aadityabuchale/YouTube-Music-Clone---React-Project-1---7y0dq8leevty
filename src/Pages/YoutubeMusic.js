@@ -2,22 +2,19 @@ import React, { useEffect, useState } from "react";
 import Navbar from "../Components/Navbar";
 import "./Pages.styles/YoutubeMusic.css";
 import Main from "./Main";
+import AppContext from "./AppContext";
+import AppContextFunction from "./AppContext";
+
 import { getAllSongs } from "../ApiService";
 
 function YoutubeMusic() {
-    useEffect(() => {
-        let func = async () => {
-            const data = await getAllSongs();
-        };
-
-        func();
-    }, []);
-
     return (
-        <div className="youtube-music-app">
-            <Navbar></Navbar>
-            <Main />
-        </div>
+        <AppContextFunction>
+            <div className="youtube-music-app">
+                <Navbar></Navbar>
+                <Main />
+            </div>
+        </AppContextFunction>
     );
 }
 

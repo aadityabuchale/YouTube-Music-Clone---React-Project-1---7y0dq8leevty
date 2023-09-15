@@ -2,16 +2,22 @@
     color: white;
     font-size: 1rem;
     display: flex;
+    margin-top: 0.5rem;
     flex-direction: column;
     gap: 0.3rem;
     border-right: 0.8px solid #2a2a2a;
     /* background-color: red; */
-    width: 18%;
+    width: 16%;
+}
+
+.logo-img {
+    width: 50%;
+    height: 100%;
 }
 
 .nav-item {
     padding: 0.625rem;
-    padding-left: 3rem;
+    padding-left: 1rem;
     display: flex;
     gap: 1rem;
     /* background-color: red; */
@@ -19,7 +25,31 @@
     font-size: 16px;
     border-radius: 0.375rem;
     width: fit-content;
-    padding-right: 5.75rem;
+    padding-right: 6rem;
+    margin-left: 1rem;
+}
+
+.nav-item-logo {
+    padding: 0.625rem;
+    padding-left: 1rem;
+    display: flex;
+    gap: 1rem;
+    min-width: 200px;
+    /* background-color: red; */
+    font-weight: 400;
+    font-size: 16px;
+    border-radius: 0.375rem;
+    width: fit-content;
+    padding-right: 6rem;
+    margin-left: 1rem;
+    cursor: pointer;
+}
+
+.nav-item:hover {
+    cursor: pointer;
+    background-color: #2a2a2a !important;
+    /* background-color: #1e1e1e; */
+    transition: all 0.2s ease-in-out;
 }
 
 .header-1 {
@@ -33,14 +63,19 @@
 
 .nav-item-collapse {
     display: flex;
-    padding-left: 1rem;
-    flex-direction: column;
-    justify-content: flex-start;
-    /* background-color: rebeccapurple; */
-    align-items: center;
-    gap: 0.8rem;
-    padding-right: 1rem;
-    font-size: 12px;
     width: fit-content;
+    padding: 4px 1rem 4px 1rem;
+    align-items: center;
+    justify-content: center;
     margin-bottom: 5px;
+    margin-left: 0.4rem;
+    flex-direction: column;
+    /* background-color: rebeccapurple; */
+    font-size: 12px;
+    border-radius: 0.375rem;
+}
+.nav-item-collapse:hover {
+    cursor: pointer;
+    background-color: #2a2a2a !important;
+    transition: all 0.2s ease-in-out;
 }
