@@ -6,12 +6,12 @@ function Buttons({ activity }) {
         <Button
             size="small"
             sx={{
-                backgroundColor: "#41413D",
+                backgroundColor: "#232323",
                 color: "white",
                 textTransform: "none",
                 padding: "5px",
                 ":hover": {
-                    backgroundColor: "rgb(117, 116, 116)",
+                    backgroundColor: "rgb(70, 70, 70)",
                 },
             }}
         >

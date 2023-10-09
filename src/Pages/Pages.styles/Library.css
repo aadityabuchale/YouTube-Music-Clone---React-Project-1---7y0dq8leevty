@@ -1,0 +1,12 @@
+.library-buttons {
+    /* background-color: red; */
+    width: 100%;
+    height: 5vmax;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+    padding-left: 20px;
+    margin-top: 25px;
+    /* background-color: #232323; */
+}
