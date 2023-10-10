@@ -3,12 +3,14 @@ import HomeSharpIcon from "@mui/icons-material/HomeSharp";
 import ExploreIcon from "@mui/icons-material/Explore";
 import LibraryMusicSharpIcon from "@mui/icons-material/LibraryMusicSharp";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
-import { AppContext } from "../Pages/AppContext";
+import { MusicDataContext } from "../Contexts/MusicDataContext";
+
 import "./Components.styles/Navbar.css";
 
 function Navbar() {
     const [navExpanded, setNavExpanded] = useState(true);
-    const { selectedNavItem, setSelectedNavItem } = useContext(AppContext);
+    const { selectedNavItem, setSelectedNavItem } =
+        useContext(MusicDataContext);
 
     const navArray = [
         {

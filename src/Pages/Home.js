@@ -15,7 +15,18 @@ function Home() {
                     return <Buttons key={idx} activity={activity}></Buttons>;
                 })}
             </div>
-            <MusicCarousel heading={"Recommanded Music Videos"} />
+            <MusicCarousel
+                heading={"Recommanded Music Videos"}
+                musicType="trendSong"
+                cardType="rectangle"
+            />
+
+            <MusicCarousel
+                heading={"New Releases"}
+                musicType={"newRelease"}
+                cardType={"square"}
+            />
+
             <ArtistYouLike />
         </section>
     );

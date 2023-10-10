@@ -1,10 +1,12 @@
-.music-card {
+.smusic-card {
     min-width: 350px;
     height: 50px;
     display: flex;
     gap: 10px;
-    margin-right: 10px;
+    margin-right: 15px;
     font-size: 15px;
+    position: relative;
+    transition: 0.4s cubic-bezier(0.19, 1, 0.22, 1);
 }
 
 .count {
@@ -25,8 +27,24 @@
 
 .music-card:hover .play-icon {
     opacity: 1 !important;
+    transition: 0.4s cubic-bezier(0.19, 1, 0.22, 1);
 }
 
 .music-card:hover .simage img {
     opacity: 0.3;
+}
+
+.hover-icons {
+    display: flex;
+    gap: 13px;
+    position: absolute;
+    right: 0;
+    padding: 10px;
+    background-color: #000;
+    opacity: 0;
+}
+
+.music-card:hover .hover-icons {
+    opacity: 1;
+    transition: 0.3s cubic-bezier(0.19, 1, 0.22, 1);
 }

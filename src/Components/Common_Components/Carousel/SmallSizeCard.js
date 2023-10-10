@@ -2,10 +2,15 @@ import React from "react";
 import "./SmallSizeCard.css";
 
 import PlayArrowSharpIcon from "@mui/icons-material/PlayArrowSharp";
+import MoreVertOutlinedIcon from "@mui/icons-material/MoreVertOutlined";
+import ThumbUpOffAltOutlinedIcon from "@mui/icons-material/ThumbUpOffAltOutlined";
+import ThumbDownAltOutlinedIcon from "@mui/icons-material/ThumbDownAltOutlined";
 
-function SmallSizeCard(props) {
+function SmallSizeCard({ song, count }) {
+    const { _id, thumbnail, title, artist } = song;
+
     return (
-        <div key={props.song?._id} className="music-card">
+        <div key={_id} className="smusic-card">
             <div className="simage">
                 <PlayArrowSharpIcon
                     className="play-icon"
@@ -18,18 +23,24 @@ function SmallSizeCard(props) {
                         zIndex: "5",
                     }}
                 />
-                <img src={props.song?.thumbnail} alt="" />
+                <img src={thumbnail} alt="" />
             </div>
             <div className="count">
-                <b>{props.count}</b>
+                <b>{count}</b>
+            </div>
+
+            <div className="hover-icons">
+                <ThumbUpOffAltOutlinedIcon />
+                <ThumbDownAltOutlinedIcon />
+                <MoreVertOutlinedIcon />
             </div>
 
             <div className="smusic-details">
                 <p className="smusic-name">
-                    <b>{props.song?.title}</b>
+                    <b>{title}</b>
                 </p>
                 <p className="smusic-artist">
-                    {props.song?.artist?.map((a) => a.name).join(", ")}
+                    {artist?.map((a) => a.name).join(", ")}
                 </p>
             </div>
         </div>

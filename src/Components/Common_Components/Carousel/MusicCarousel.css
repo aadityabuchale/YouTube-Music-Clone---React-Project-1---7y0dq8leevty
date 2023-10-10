@@ -21,22 +21,12 @@
     font-family: "yt-sans-bold";
 }
 
-/* .carousel-body {
+.carousel-body {
     overflow-x: hidden;
     display: flex;
     gap: 10px;
     height: 80%;
     margin-top: 5px;
-} */
-
-.carousel-body {
-    overflow-x: hidden;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    gap: 10px;
-    height: 90%;
-    margin-top: 10px;
 }
 
 .carousel-nav-icons {

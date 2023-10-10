@@ -1,13 +1,13 @@
 import React, { useContext } from "react";
 import Home from "./Home";
 import Header from "../Components/Header";
-import { AppContext } from "./AppContext";
+import { MusicDataContext } from "../Contexts/MusicDataContext";
 import "./Pages.styles/Main.css";
 import Explore from "./Explore";
 import Library from "./Library";
 
 function Main() {
-    const { selectedNavItem } = useContext(AppContext);
+    const { selectedNavItem } = useContext(MusicDataContext);
 
     return (
         <div className="main">

@@ -1,5 +1,5 @@
 import React, { useContext, createRef, useState } from "react";
-import { AppContext } from "../../../Pages/AppContext";
+import { MusicDataContext } from "../../../Contexts/MusicDataContext";
 
 // mui imports
 import { Button } from "@mui/material";
@@ -9,10 +9,16 @@ import RectangleCard from "./RectangleCard";
 import SquareCard from "./SquareCard";
 import SmallSizeCard from "./SmallSizeCard";
 
-const MusicCarousel = ({ heading }) => {
-    const { allSongs } = useContext(AppContext);
+const MusicCarousel = ({ heading, musicType, cardType }) => {
+    const { allMusicData } = useContext(MusicDataContext);
     const myRef = createRef();
 
+    // finding the music list for rendering according to type
+    let musicListToRender = allMusicData.find(
+        (musicData) => musicData.action === musicType
+    )?.data;
+
+    // logic for left right carousel movement
     const [isLeft, setIsLeft] = useState(true);
     const [isRight, setIsRight] = useState(false);
 
@@ -111,16 +117,47 @@ const MusicCarousel = ({ heading }) => {
             </div>
 
             {/* all cards */}
-            <div className="carousel-body" ref={myRef} onScroll={handleScroll}>
-                {allSongs?.map((song, idx) => {
-                    return (
-                        <SmallSizeCard
-                            song={song}
-                            key={song._id}
-                            count={idx + 1}
-                        />
-                    );
-                })}
+            <div
+                className="carousel-body"
+                ref={myRef}
+                onScroll={handleScroll}
+                style={
+                    cardType === "smallSize" && {
+                        overflowX: "hidden",
+                        display: "flex",
+                        flexDirection: "column",
+                        flexWrap: "wrap",
+                        gap: "10px",
+                        height: "90%",
+                        marginTop: "10px",
+                    }
+                }
+            >
+                {musicListToRender &&
+                    musicListToRender?.map((song, idx) => {
+                        return (
+                            <React.Fragment key={song?._id}>
+                                {cardType === "rectangle" && (
+                                    <RectangleCard
+                                        song={song}
+                                        key={song?._id}
+                                    />
+                                )}
+
+                                {cardType === "square" && (
+                                    <SquareCard song={song} key={song?._id} />
+                                )}
+
+                                {cardType === "smallSize" && (
+                                    <SmallSizeCard
+                                        song={song}
+                                        key={song?._id}
+                                        count={idx + 1}
+                                    />
+                                )}
+                            </React.Fragment>
+                        );
+                    })}
             </div>
         </div>
     );

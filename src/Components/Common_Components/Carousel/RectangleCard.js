@@ -3,9 +3,11 @@ import "./RectangleCard.css";
 import PlayArrowSharpIcon from "@mui/icons-material/PlayArrowSharp";
 
 function RectangleCard(props) {
+    const { _id, thumbnail, title, artist } = props.song;
+
     return (
-        <div key={props.song?._id} className="music-card">
-            <div className="image">
+        <div key={_id} className="rmusic-card">
+            <div className="rimage">
                 <PlayArrowSharpIcon
                     sx={{
                         fontSize: "50px",
@@ -15,11 +17,13 @@ function RectangleCard(props) {
                         zIndex: "5",
                     }}
                 />
-                <img src={props.song?.thumbnail} alt="" />
+                <img src={thumbnail} alt="" />
             </div>
-            <div className="music-details">
-                <p className="music-name">{props.song?.title}</p>
-                <p className="music-artist">{props.song?.artist[0]?.name}</p>
+            <div className="rmusic-details">
+                <p className="rmusic-name">
+                    <b>{title}</b>
+                </p>
+                <p className="rmusic-artist">{artist[0]?.name}</p>
             </div>
         </div>
     );

@@ -1,15 +1,20 @@
 import axios from "axios";
 
-function getAllSongs() {
-    return axios
-        .get("https://academics.newtonschool.co/api/v1/music/song", {
+const BASE_URL = "https://academics.newtonschool.co/api/v1/music/";
+const PROJECT_ID = "7y0dq8leevty";
+
+// get all songs
+async function getSongsByCategory(endUrl) {
+    try {
+        const resut = await axios.get(BASE_URL + endUrl, {
             headers: {
-                projectId: "7y0dq8leevty",
+                projectId: PROJECT_ID,
             },
-        })
-        .then((resut) => {
-            return resut.data.data;
         });
+        return resut.data.data;
+    } catch (err) {
+        return console.log(err);
+    }
 }
 
-export { getAllSongs };
+export { getSongsByCategory };
