@@ -5,6 +5,7 @@ import { MusicDataContext } from "../Contexts/MusicDataContext";
 import "./Pages.styles/Main.css";
 import Explore from "./Explore";
 import Library from "./Library";
+import Upgrade from "./Upgrade";
 
 function Main() {
     const { selectedNavItem } = useContext(MusicDataContext);
@@ -17,6 +18,7 @@ function Main() {
             {selectedNavItem === "Explore" && <Explore />}
             {selectedNavItem === "Home" && <Home />}
             {selectedNavItem === "Library" && <Library />}
+            {selectedNavItem === "Upgrade" && <Upgrade />}
         </div>
     );
 }

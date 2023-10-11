@@ -6,7 +6,7 @@ import { getSongsByCategory } from "../ApiService";
 const MusicDataContext = createContext({});
 
 function MusicDataContextFunction({ children }) {
-    const [selectedNavItem, setSelectedNavItem] = useState("Library");
+    const [selectedNavItem, setSelectedNavItem] = useState("Upgrade");
     const [allMusicData, setAllMusicData] = useState([]);
 
     const musicDataInfo = [

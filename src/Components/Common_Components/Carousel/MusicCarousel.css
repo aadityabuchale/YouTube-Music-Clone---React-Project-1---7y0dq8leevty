@@ -12,7 +12,7 @@
 .carousel-heading {
     width: 100%;
     height: 20%;
-    font-size: 1.8vmax;
+    font-size: 1.6vmax;
     display: flex;
     justify-content: space-between;
     /* background-color: cyan; */
@@ -25,7 +25,6 @@
 .carousel-body {
     overflow: hidden;
     display: flex;
-    gap: 10px;
     height: 80%;
 }
 
