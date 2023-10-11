@@ -25,12 +25,12 @@
     height: 30px;
 }
 
-.music-card:hover .play-icon {
+.smusic-card:hover .play-icon {
     opacity: 1 !important;
     transition: 0.4s cubic-bezier(0.19, 1, 0.22, 1);
 }
 
-.music-card:hover .simage img {
+.smusic-card:hover .simage img {
     opacity: 0.3;
 }
 
@@ -44,7 +44,7 @@
     opacity: 0;
 }
 
-.music-card:hover .hover-icons {
+.smusic-card:hover .hover-icons {
     opacity: 1;
     transition: 0.3s cubic-bezier(0.19, 1, 0.22, 1);
 }

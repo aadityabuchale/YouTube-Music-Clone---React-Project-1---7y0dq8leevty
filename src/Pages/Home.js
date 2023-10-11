@@ -1,7 +1,7 @@
 import React from "react";
 import Buttons from "../Components/Common_Components/Button";
 import "./Pages.styles/Home.css";
-import ArtistYouLike from "../Components/ArtistYouLike";
+import ArtistsBanner from "../Components/ArtistsBanner";
 import MusicCarousel from "../Components/Common_Components/Carousel/MusicCarousel";
 
 function Home() {
@@ -27,7 +27,43 @@ function Home() {
                 cardType={"square"}
             />
 
-            <ArtistYouLike />
+            <ArtistsBanner />
+
+            <MusicCarousel
+                heading={"Top Artists"}
+                musicType={"stars"}
+                cardType={"artist"}
+            />
+
+            <MusicCarousel
+                heading={"Trending Songs"}
+                musicType={"trendSong"}
+                cardType={"smallSize"}
+            />
+
+            <MusicCarousel
+                heading={"Romance Right Now"}
+                musicType={"romantic"}
+                cardType={"rectangle"}
+            />
+
+            <MusicCarousel
+                heading={"Let's Party"}
+                musicType={"happy"}
+                cardType={"square"}
+            />
+
+            <MusicCarousel
+                heading={"Quick Picks"}
+                musicType={"newRelease"}
+                cardType={"smallSize"}
+            />
+
+            <MusicCarousel
+                heading={"Wistful Melodies"}
+                musicType={"sad"}
+                cardType={"square"}
+            />
         </section>
     );
 }

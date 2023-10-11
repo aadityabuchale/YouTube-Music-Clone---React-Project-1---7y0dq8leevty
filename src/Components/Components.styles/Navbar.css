@@ -2,12 +2,17 @@
     color: white;
     font-size: 1rem;
     display: flex;
-    margin-top: 0.5rem;
+    padding-right: 25px;
+    padding-top: 10px;
     flex-direction: column;
     gap: 0.3rem;
     border-right: 0.8px solid #2a2a2a;
     /* background-color: red; */
-    width: 16%;
+    width: 18%;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    min-height: 98vh;
 }
 
 .logo-img {

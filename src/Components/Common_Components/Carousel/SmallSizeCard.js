@@ -40,7 +40,10 @@ function SmallSizeCard({ song, count }) {
                     <b>{title}</b>
                 </p>
                 <p className="smusic-artist">
-                    {artist?.map((a) => a.name).join(", ")}
+                    {artist
+                        ?.map((a) => a.name)
+                        .slice(0, 2)
+                        .join(", ")}
                 </p>
             </div>
         </div>

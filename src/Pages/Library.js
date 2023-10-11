@@ -2,6 +2,8 @@ import React from "react";
 import Button from "../Components/Common_Components/Button";
 import "./Pages.styles/Library.css";
 
+import PushPinSharpIcon from "@mui/icons-material/PushPinSharp";
+
 const Library = () => {
     let categoryArr = ["Playlists", "Songs", "Albums", "Artists"];
 
@@ -19,7 +21,10 @@ const Library = () => {
                 </div>
                 <div className="liked-card-text">
                     <p>Your Likes</p>
-                    <p> </p>
+                    <div>
+                        <PushPinSharpIcon sx={{ fontSize: "20px" }} />
+                        <span> Auto playlist</span>
+                    </div>
                 </div>
             </div>
         </section>

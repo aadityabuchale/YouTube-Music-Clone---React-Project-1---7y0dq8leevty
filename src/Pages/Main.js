@@ -12,6 +12,7 @@ function Main() {
     return (
         <div className="main">
             <Header />
+
             {/* rendering component accoding to selected component from navbar */}
             {selectedNavItem === "Explore" && <Explore />}
             {selectedNavItem === "Home" && <Home />}

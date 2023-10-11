@@ -13,7 +13,7 @@ async function getSongsByCategory(endUrl) {
         });
         return resut.data.data;
     } catch (err) {
-        return console.log(err);
+        return console.error(err);
     }
 }
 

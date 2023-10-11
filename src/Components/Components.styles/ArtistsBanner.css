@@ -1,27 +1,30 @@
 .artists-like-container {
-    width: 90%;
+    width: 100%;
     height: 12vmax;
     display: flex;
     justify-content: center;
+    align-items: center;
+    gap: 5px;
     /* background-color: red; */
     color: var(--text-color);
     margin-top: 50px;
 }
 
 .artists-like-container img {
-    width: 60%;
+    width: 50%;
     height: 95%;
 }
 
 .info-container {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 12px;
     margin-left: 20px;
     margin-top: 20px;
 }
 
-.info-container div {
+.question-text {
+    font-family: "yt-sans-regular";
+    font-size: 28px;
     font-weight: 700;
-    font-size: 22px;
 }

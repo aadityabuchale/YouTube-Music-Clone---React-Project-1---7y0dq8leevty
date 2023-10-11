@@ -31,7 +31,7 @@
 }
 
 .play-btn-bg {
-    padding: 5px;
+    padding: 3px 4px 2.5px 4px;
     border-radius: 50%;
     position: absolute;
     top: 60%;

@@ -3,8 +3,8 @@ import "./SquareCard.css";
 
 import PlayArrowSharpIcon from "@mui/icons-material/PlayArrowSharp";
 
-function SquareCard(props) {
-    const { _id, thumbnail, title, artist } = props.song;
+function ArtistsCard(props) {
+    const { _id, image, name, description } = props.artist;
 
     return (
         <div key={_id} className="music-card">
@@ -19,14 +19,18 @@ function SquareCard(props) {
                     />
                 </div>
 
-                <img src={thumbnail} alt="" />
+                <img src={image} alt="" />
             </div>
             <div className="music-details">
-                <p className="music-name">{title}</p>
-                <p className="music-artist">{artist[0]?.name}</p>
+                <p className="music-name">
+                    <b>{name}</b>
+                </p>
+                <p className="music-artist">
+                    {description.substring(0, 25) + "..."}
+                </p>
             </div>
         </div>
     );
 }
 
-export default SquareCard;
+export default ArtistsCard;

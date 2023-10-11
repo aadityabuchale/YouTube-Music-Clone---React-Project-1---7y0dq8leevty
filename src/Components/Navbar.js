@@ -12,6 +12,7 @@ function Navbar() {
     const { selectedNavItem, setSelectedNavItem } =
         useContext(MusicDataContext);
 
+    // navarray which contains all components and current states
     const navArray = [
         {
             name: "Home",
@@ -55,6 +56,7 @@ function Navbar() {
         },
     ];
 
+    // changing styles according to expand icon clicked
     let navStyle = navExpanded ? "nav-item" : "nav-item-collapse";
     let navbarStyle = navExpanded
         ? {}

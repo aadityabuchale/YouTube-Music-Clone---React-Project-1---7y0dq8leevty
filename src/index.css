@@ -13,6 +13,12 @@
     src: url(../public/fonts/YouTubeSansMedium.otf);
 }
 
+:root {
+    --primary-color: #020202;
+    --secondary-color: #1d1d1d;
+    --text-color: #fff;
+}
+
 * {
     font-family: "roboto", "yt-sans-regular", "sans-serif";
     margin: 0;

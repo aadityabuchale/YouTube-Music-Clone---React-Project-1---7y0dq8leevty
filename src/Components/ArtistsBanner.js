@@ -1,11 +1,14 @@
 import React from "react";
-import "./Components.styles/ArtistsYouLike.css";
+import "./Components.styles/ArtistsBanner.css";
 import { Button } from "@mui/material";
 
-const ArtistYouLike = () => {
+const ArtistsBanner = () => {
     return (
         <div className="artists-like-container">
-            <img src="./images/artists.png" alt="" />
+            <img
+                src="https://www.youtube.com/img/music/tastebuilder/shelf_thumbnail/v6/IN_992_X_304.png"
+                alt=""
+            />
             <div className="info-container">
                 <div className="question-text">
                     Tell us which artists you like
@@ -31,4 +34,4 @@ const ArtistYouLike = () => {
     );
 };
 
-export default ArtistYouLike;
+export default ArtistsBanner;

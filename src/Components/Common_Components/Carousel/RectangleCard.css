@@ -1,6 +1,7 @@
 .rmusic-card {
-    min-width: 23%;
+    min-width: 285px;
     height: 90%;
+    border-radius: 3px;
     /* background-color: red; */
 }
 
