@@ -1,5 +1,6 @@
 .explore-section {
-    width: 90%;
+    min-width: 90%;
     min-height: 90vh;
     padding-bottom: 100px;
+    margin-right: 100px;
 }

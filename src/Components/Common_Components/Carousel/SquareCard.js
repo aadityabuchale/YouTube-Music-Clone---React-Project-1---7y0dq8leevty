@@ -1,13 +1,17 @@
 import React from "react";
 import "./SquareCard.css";
-
+import { useMusic } from "../../../Contexts/MusicPlayerProvider";
 import PlayArrowSharpIcon from "@mui/icons-material/PlayArrowSharp";
 
 function SquareCard(props) {
     const { _id, thumbnail, title, artist } = props.song;
-
+    const { musicDispatch } = useMusic();
     return (
-        <div key={_id} className="music-card">
+        <div
+            key={_id}
+            className="music-card"
+            onClick={() => musicDispatch({ type: "setMusicId", payload: _id })}
+        >
             <div className="image">
                 <div className="play-btn-bg">
                     <PlayArrowSharpIcon

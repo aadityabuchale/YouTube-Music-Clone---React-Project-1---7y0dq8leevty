@@ -5,8 +5,8 @@ import { getSongsByCategory } from "../ApiService";
 // creating a context
 const MusicDataContext = createContext({});
 
-function MusicDataContextFunction({ children }) {
-    const [selectedNavItem, setSelectedNavItem] = useState("Upgrade");
+function MusicDataContextProvider({ children }) {
+    const [selectedNavItem, setSelectedNavItem] = useState("Home");
     const [allMusicData, setAllMusicData] = useState([]);
 
     const musicDataInfo = [
@@ -68,18 +68,18 @@ function MusicDataContextFunction({ children }) {
         musicDataInfo.map(async (music) => {
             if (music.mood) {
                 let data = await getSongsByCategory(
-                    `${music.type}?filter={"mood":"${music.mood}"}`
+                    `${music.type}?filter={"mood":"${music.mood}"}&limit=30`
                 );
 
                 handleMusicData(data, music.action);
             } else if (music.sort) {
                 let data = await getSongsByCategory(
-                    `${music.type}?sort={"release":1}`
+                    `${music.type}?sort={"release":1}&limit=30`
                 );
 
                 handleMusicData(data, music.action);
             } else {
-                let data = await getSongsByCategory(`${music.type}`);
+                let data = await getSongsByCategory(`${music.type}?limit=30`);
 
                 handleMusicData(data, music.action);
             }
@@ -106,5 +106,5 @@ function MusicDataContextFunction({ children }) {
 }
 
 // exporting stuff
-export default MusicDataContextFunction;
+export default MusicDataContextProvider;
 export { MusicDataContext };

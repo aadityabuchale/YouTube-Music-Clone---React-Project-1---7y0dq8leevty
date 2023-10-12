@@ -1,12 +1,17 @@
 import React from "react";
 import "./RectangleCard.css";
 import PlayArrowSharpIcon from "@mui/icons-material/PlayArrowSharp";
+import { useMusic } from "../../../Contexts/MusicPlayerProvider";
 
 function RectangleCard(props) {
     const { _id, thumbnail, title, artist } = props.song;
-
+    const { musicDispatch } = useMusic();
     return (
-        <div key={_id} className="rmusic-card">
+        <div
+            key={_id}
+            className="rmusic-card"
+            onClick={() => musicDispatch({ type: "setMusicId", payload: _id })}
+        >
             <div className="rimage">
                 <PlayArrowSharpIcon
                     sx={{

@@ -1,5 +1,6 @@
 import React from "react";
 import "./SmallSizeCard.css";
+import { useMusic } from "../../../Contexts/MusicPlayerProvider";
 
 import PlayArrowSharpIcon from "@mui/icons-material/PlayArrowSharp";
 import MoreVertOutlinedIcon from "@mui/icons-material/MoreVertOutlined";
@@ -8,9 +9,14 @@ import ThumbDownAltOutlinedIcon from "@mui/icons-material/ThumbDownAltOutlined";
 
 function SmallSizeCard({ song, count }) {
     const { _id, thumbnail, title, artist } = song;
+    const { musicDispatch } = useMusic();
 
     return (
-        <div key={_id} className="smusic-card">
+        <div
+            key={_id}
+            className="smusic-card"
+            onClick={() => musicDispatch({ type: "setMusicId", payload: _id })}
+        >
             <div className="simage">
                 <PlayArrowSharpIcon
                     className="play-icon"

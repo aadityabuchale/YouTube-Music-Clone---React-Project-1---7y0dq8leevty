@@ -1,5 +1,5 @@
 import React, { useContext, createRef, useState, useEffect } from "react";
-import { MusicDataContext } from "../../../Contexts/MusicDataContext";
+import { MusicDataContext } from "../../../Contexts/MusicDataProvider";
 import { getSongsByCategory } from "../../../ApiService";
 
 // mui imports
@@ -41,17 +41,17 @@ const MusicCarousel = ({ heading, musicType, cardType, isReverse }) => {
             async function fetchSongsForSmallSizeCard() {
                 if (musicMetaData.mood) {
                     let data = await getSongsByCategory(
-                        `${musicMetaData.type}?filter={"mood":"${musicMetaData.mood}"}`
+                        `${musicMetaData.type}?filter={"mood":"${musicMetaData.mood}&limt=50"}`
                     );
                     handleDataForRender(data);
                 } else if (musicMetaData.sort) {
                     let data = await getSongsByCategory(
-                        `${musicMetaData?.type}?sort={"release":1}`
+                        `${musicMetaData?.type}?sort={"release":1}&limit=50`
                     );
                     handleDataForRender(data);
                 } else {
                     let data = await getSongsByCategory(
-                        `${musicMetaData.type}`
+                        `${musicMetaData.type}?limit=50`
                     );
                     handleDataForRender(data);
                 }

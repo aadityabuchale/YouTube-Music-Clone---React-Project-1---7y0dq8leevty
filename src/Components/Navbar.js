@@ -3,7 +3,7 @@ import HomeSharpIcon from "@mui/icons-material/HomeSharp";
 import ExploreIcon from "@mui/icons-material/Explore";
 import LibraryMusicSharpIcon from "@mui/icons-material/LibraryMusicSharp";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
-import { MusicDataContext } from "../Contexts/MusicDataContext";
+import { MusicDataContext } from "../Contexts/MusicDataProvider";
 
 import "./Components.styles/Navbar.css";
 
@@ -60,7 +60,11 @@ function Navbar() {
     let navStyle = navExpanded ? "nav-item" : "nav-item-collapse";
     let navbarStyle = navExpanded
         ? {}
-        : { borderRight: "transparent", width: "10%" };
+        : {
+              borderRight: "transparent",
+              width: "10%",
+              transition: "all 0.6s ease-out",
+          };
 
     const handleNavClick = (name) => {
         setSelectedNavItem(name);

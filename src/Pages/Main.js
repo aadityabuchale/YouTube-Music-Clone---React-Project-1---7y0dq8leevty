@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import Home from "./Home";
 import Header from "../Components/Header";
-import { MusicDataContext } from "../Contexts/MusicDataContext";
+import { MusicDataContext } from "../Contexts/MusicDataProvider";
 import "./Pages.styles/Main.css";
 import Explore from "./Explore";
 import Library from "./Library";
