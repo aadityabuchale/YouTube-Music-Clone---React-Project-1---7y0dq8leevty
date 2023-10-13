@@ -16,13 +16,13 @@
 
 .simage {
     position: relative;
-    width: 60px;
-    height: 30px;
+    width: 45px;
+    height: 45px;
 }
 
 .simage img {
-    width: 60px;
-    height: 30px;
+    width: 45px;
+    height: 45px;
 }
 
 .smusic-card:hover .play-icon {

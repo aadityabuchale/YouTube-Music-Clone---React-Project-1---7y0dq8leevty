@@ -5,7 +5,7 @@ import Main from "./Main";
 import MusicDataContextProvider from "../Contexts/MusicDataProvider";
 import SignInModal from "../Components/SignInModal";
 import MusicPlayerProvider from "../Contexts/MusicPlayerProvider";
-import MusicPlayer from "./MusicPlayer";
+import MusicPlayerController from "../Components/MusicPlayerController";
 
 function YoutubeMusic() {
     return (
@@ -15,8 +15,8 @@ function YoutubeMusic() {
                     <Navbar></Navbar>
                     <Main />
                     {/* <SignInModal></SignInModal> */}
-                    <MusicPlayer />
                 </div>
+                {/* <MusicPlayerController /> */}
             </MusicPlayerProvider>
         </MusicDataContextProvider>
     );

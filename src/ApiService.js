@@ -31,4 +31,24 @@ async function getMusic(id) {
     }
 }
 
-export { getSongsByCategory, getMusic };
+async function getAlbumOrArtist(id, isAlbum) {
+    const albumOrArtist = isAlbum ? "album/" : "artist/";
+
+    const URL = BASE_URL + albumOrArtist + id;
+
+    try {
+        const result = await axios.get(URL, {
+            headers: {
+                projectId: PROJECT_ID,
+            },
+        });
+
+        // console.log(result.data.data);
+
+        return result.data.data;
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+export { getSongsByCategory, getMusic, getAlbumOrArtist };

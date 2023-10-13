@@ -21,7 +21,7 @@
     gap: 20px;
 }
 
-.music-details {
+.music-info {
     /* background-color: blue; */
     width: 60%;
     display: flex;
@@ -30,12 +30,13 @@
     gap: 25px;
 }
 
-.music-details img {
-    width: 45px;
+.music-info img {
+    width: 60px;
+    height: 40px;
     border-radius: 2px;
 }
 
-.music-info {
+.music-artist-name {
     min-width: 12%;
 }
 

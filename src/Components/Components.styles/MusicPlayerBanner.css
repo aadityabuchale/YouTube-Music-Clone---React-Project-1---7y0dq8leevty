@@ -1,0 +1,13 @@
+.banner-container {
+    width: 60%;
+    /* background-color: aqua; */
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.banner-container img {
+    width: 80%;
+    height: 90%;
+}

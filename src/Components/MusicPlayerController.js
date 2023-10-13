@@ -18,19 +18,24 @@ import ThumbDownAltOutlinedIcon from "@mui/icons-material/ThumbDownAltOutlined";
 function MusicPlayerController() {
     // gettting data from context
     const { musicId, musicStatus, musicDispatch, musicObject } = useMusic();
-    const [audioUrl, setAudioUrl] = useState("");
+    const [audioUrl, setAudioUrl] = useState(
+        "https://newton-project-resume-backend.s3.amazonaws.com/audio/64cf94e447ae38c3e33a7253.mp3"
+    );
 
     const { _id, title, artist, thumbnail, audio_url } = musicObject;
 
     let artistName = artist && artist?.map((a) => a.name)?.join(" & ");
 
     // using use-sound hook
-    const [play, { pause, stop, duration }] = useSound(audioUrl, {
+    const [play, { duration, pause, stop, sound }] = useSound(audioUrl, {
+        format: "mp3",
         volume: 1,
     });
 
     const isFirstRender = useRef(true);
     const [isCapable, setIsCapable] = useState(false);
+
+    // console.log(duration, audioUrl, title);
 
     useEffect(() => {
         setAudioUrl(() => audio_url);
@@ -38,11 +43,6 @@ function MusicPlayerController() {
 
     // for handling current song when different song clicked
     useEffect(() => {
-        if (musicId) {
-            musicDispatch({ type: "play" });
-            stop();
-        }
-
         return () => stop();
     }, [musicId]);
 
@@ -120,9 +120,9 @@ function MusicPlayerController() {
 
             {/* center display information */}
             {musicObject && (
-                <div className="music-details">
+                <div className="music-info">
                     <img src={thumbnail} alt="" />
-                    <div className="music-info">
+                    <div className="music-artist-name">
                         <div className="music-name">{title}</div>
                         <div className="artist-name">{artistName}</div>
                     </div>

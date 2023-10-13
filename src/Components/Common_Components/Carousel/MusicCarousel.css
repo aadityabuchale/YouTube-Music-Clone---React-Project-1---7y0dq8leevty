@@ -23,9 +23,13 @@
 }
 
 .carousel-body {
-    overflow: hidden;
+    overflow: auto;
     display: flex;
     height: 80%;
+}
+
+.carousel-body::-webkit-scrollbar {
+    display: none;
 }
 
 .carousel-nav-icons {
