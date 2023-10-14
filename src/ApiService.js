@@ -17,6 +17,7 @@ async function getSongsByCategory(endUrl) {
     }
 }
 
+// for single music
 async function getMusic(id) {
     try {
         const result = await axios.get(BASE_URL + "song/" + id, {
@@ -31,6 +32,7 @@ async function getMusic(id) {
     }
 }
 
+// for albums or artists
 async function getAlbumOrArtist(id, isAlbum) {
     const albumOrArtist = isAlbum ? "album/" : "artist/";
 
@@ -51,4 +53,30 @@ async function getAlbumOrArtist(id, isAlbum) {
     }
 }
 
-export { getSongsByCategory, getMusic, getAlbumOrArtist };
+async function getSearchResult(input, type) {
+    let URL = `${BASE_URL}${type}?search={"title":"${input}"}`;
+
+    if (type === "artist") {
+        URL = `${BASE_URL}${type}?search={"name":"${input}"}`;
+    } else {
+        URL = `${BASE_URL}${type}?search={"title":"${input}"}`;
+    }
+
+    // console.log(URL);
+
+    try {
+        const result = await axios.get(URL, {
+            headers: {
+                projectId: PROJECT_ID,
+            },
+        });
+
+        // console.log(result.data.data);
+
+        return result.data.data;
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+export { getSongsByCategory, getMusic, getAlbumOrArtist, getSearchResult };

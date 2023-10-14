@@ -15,35 +15,6 @@
     /* border-bottom: 0.3px solid #292929; */
 }
 
-.search-box {
-    display: flex;
-    width: 50%;
-    height: 110%;
-    border-radius: 0.375rem;
-    color: var(--text-color);
-}
-
-.search-icon {
-    background-color: #292929;
-    color: white;
-    width: 10%;
-    border-top-left-radius: 0.4rem;
-    border-bottom-left-radius: 0.4rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.search-input {
-    width: 80%;
-    padding: 0.25rem 0.75rem;
-    background-color: #292929;
-    border-top-right-radius: 0.4rem;
-    border-bottom-right-radius: 0.4rem;
-    border: none;
-    outline: none;
-}
-
 .header-3 {
     display: flex;
     gap: 1.5rem;

@@ -8,6 +8,7 @@ import Library from "./Library";
 import Upgrade from "./Upgrade";
 import MusicPlayer from "./MusicPlayer";
 import AlbumOrArtistPage from "./AlbumOrArtistPage";
+import SearchResultPage from "./SearchResultPage";
 
 function Main() {
     const { selectedNavItem } = useContext(MusicDataContext);
@@ -23,7 +24,8 @@ function Main() {
             {selectedNavItem === "Upgrade" && <Upgrade />} */}
 
             {/* <MusicPlayer /> */}
-            <AlbumOrArtistPage />
+            {/* <AlbumOrArtistPage /> */}
+            <SearchResultPage />
         </div>
     );
 }

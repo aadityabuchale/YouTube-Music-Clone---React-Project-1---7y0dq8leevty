@@ -1,0 +1,36 @@
+.searchresults-container {
+    width: 100%;
+    height: calc(400px - 45px);
+    /* background-color: aquamarine; */
+    margin-top: 3px;
+    overflow: hidden;
+}
+
+.result-container {
+    width: 100%;
+    height: 40px;
+    display: flex;
+    margin: 9px 0px;
+    /* border: 1px solid rgba(255, 255, 255); */
+    align-items: center;
+    justify-content: space-between;
+    text-align: start;
+    gap: 10px;
+}
+
+.result-text {
+    width: 80%;
+    color: #909090;
+}
+
+.searchresult-icon {
+    padding: 6px 0;
+    width: 8%;
+    height: 100%;
+    margin-left: 6px;
+    /* background-color: beige; */
+}
+
+.searchresult-icon:last-child {
+    margin-right: 15px;
+}

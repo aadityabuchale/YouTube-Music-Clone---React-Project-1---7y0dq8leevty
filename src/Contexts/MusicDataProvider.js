@@ -93,10 +93,10 @@ function MusicDataContextProvider({ children }) {
 
     // ----------- end of all music fetching --------------------
 
-    //------------ fetching albums and artist data -----------
+    //------------ fetching albums and artist data -------------
 
     const intialAlbumArtistState = {
-        albumArtistPage: "hidden",
+        albumArtistPage: "inactive",
         isAlbum: true,
         albumArtistId: "64cee72fe41f6d0a8b0cd0a8",
         albumArtistObject: {},
@@ -114,7 +114,7 @@ function MusicDataContextProvider({ children }) {
                 return { ...state, albumArtistPage: "active" };
 
             case "hideAlbumArtistPage":
-                return { ...state, albumArtistPage: "hidden" };
+                return { ...state, albumArtistPage: "inactive" };
             case "setArtist":
                 return { ...state, isAlbum: false };
 
@@ -143,6 +143,8 @@ function MusicDataContextProvider({ children }) {
 
         fetch();
     }, [albumArtistId]);
+
+    // ----------- end of fetching album artists data ------------
 
     return (
         <MusicDataContext.Provider

@@ -7,7 +7,7 @@ import MoreVertOutlinedIcon from "@mui/icons-material/MoreVertOutlined";
 import ThumbUpOffAltOutlinedIcon from "@mui/icons-material/ThumbUpOffAltOutlined";
 import ThumbDownAltOutlinedIcon from "@mui/icons-material/ThumbDownAltOutlined";
 
-function SmallSizeCard({ song, count }) {
+function SmallSizeCard({ song, count, isProfileCard }) {
     const { _id, thumbnail, title, artist } = song;
     const { musicDispatch } = useMusic();
 
@@ -16,6 +16,10 @@ function SmallSizeCard({ song, count }) {
             key={_id}
             className="smusic-card"
             onClick={() => musicDispatch({ type: "setMusicId", payload: _id })}
+            style={{
+                borderBottom: isProfileCard && "0.5px solid #121",
+                marginBottom: isProfileCard && "5px",
+            }}
         >
             <div className="simage">
                 <PlayArrowSharpIcon
@@ -31,9 +35,12 @@ function SmallSizeCard({ song, count }) {
                 />
                 <img src={thumbnail} alt="" />
             </div>
-            <div className="count">
-                <b>{count}</b>
-            </div>
+
+            {!isProfileCard && (
+                <div className="count">
+                    <b>{count}</b>
+                </div>
+            )}
 
             <div className="hover-icons">
                 <ThumbUpOffAltOutlinedIcon />
@@ -41,8 +48,15 @@ function SmallSizeCard({ song, count }) {
                 <MoreVertOutlinedIcon />
             </div>
 
-            <div className="smusic-details">
-                <p className="smusic-name">
+            <div
+                className={`smusic-details  ${
+                    isProfileCard ? "profilecard-music-details" : ""
+                } `}
+            >
+                <p
+                    className="smusic-name"
+                    style={{ width: isProfileCard && "50%" }}
+                >
                     <b>{title}</b>
                 </p>
                 <p className="smusic-artist">

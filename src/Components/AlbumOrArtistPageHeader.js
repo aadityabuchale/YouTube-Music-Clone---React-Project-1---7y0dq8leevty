@@ -1,9 +1,8 @@
 import React from "react";
 import "./Components.styles/AlbumOrArtistPageHeader.css";
 import { useMusicData } from "../Contexts/MusicDataProvider";
-import { ShuffleIcon } from "../svgs/MusicPlayerSvgs";
-
-import { Button } from "@mui/material";
+import { ShareIcon, ShuffleIcon } from "../svgs/MusicPlayerSvgs";
+import LargeSizeButton from "./Common_Components/LargeSizeButton";
 
 function AlbumOrArtistPageHeader() {
     const { albumArtistObject, isArtist } = useMusicData();
@@ -20,22 +19,20 @@ function AlbumOrArtistPageHeader() {
                 <div className="profile-name">{isArtist ? name : title}</div>
                 <div className="description">{description}</div>
                 <div className="button-container">
-                    <Button
-                        size="large"
-                        sx={{
-                            backgroundColor: "white",
-                            color: "black",
-                            textTransform: "none",
-                            padding: "5px 23px",
-                            borderRadius: "25px",
-                            ":hover": {
-                                backgroundColor: "#66b8ff",
-                            },
-                        }}
+                    <LargeSizeButton
+                        icon={
+                            <ShuffleIcon
+                                color="black"
+                                width={"25px"}
+                                height={"25px"}
+                            />
+                        }
                     >
-                        <ShuffleIcon />
-                        Shuffle
-                    </Button>
+                        Shufle
+                    </LargeSizeButton>
+                    <LargeSizeButton icon={<ShareIcon color="black" />}>
+                        Share
+                    </LargeSizeButton>
                 </div>
             </div>
         </section>

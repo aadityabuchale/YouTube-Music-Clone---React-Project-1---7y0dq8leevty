@@ -16,13 +16,13 @@
 
 .simage {
     position: relative;
-    width: 45px;
-    height: 45px;
+    width: 40px;
+    height: 40px;
 }
 
 .simage img {
-    width: 45px;
-    height: 45px;
+    width: 40px;
+    height: 40px;
 }
 
 .smusic-card:hover .play-icon {
@@ -47,4 +47,19 @@
 .smusic-card:hover .hover-icons {
     opacity: 1;
     transition: 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.smusic-name {
+    text-align: left;
+    /* background-color: red; */
+}
+
+.profilecard-music-details {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    width: 60%;
+    margin-left: 20px;
+    gap: 10px;
+    /* background-color: aqua; */
 }

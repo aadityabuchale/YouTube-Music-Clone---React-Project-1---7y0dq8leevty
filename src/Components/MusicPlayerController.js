@@ -138,7 +138,7 @@ function MusicPlayerController() {
             <div className="additional-controls">
                 <SpeakerIcon />
                 <LoopIcon />
-                <ShuffleIcon />
+                <ShuffleIcon color={"#909090"} />
                 <ArrowDropDownIcon sx={iconStyles} />
             </div>
         </section>

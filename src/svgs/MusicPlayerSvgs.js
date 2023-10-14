@@ -47,7 +47,7 @@ const LoopIcon = ({ width, height }) => {
     );
 };
 
-const ShuffleIcon = ({ width, height }) => {
+const ShuffleIcon = ({ color, width, height }) => {
     return (
         <svg
             viewBox="0 0 24 24"
@@ -55,7 +55,7 @@ const ShuffleIcon = ({ width, height }) => {
             focusable="false"
             className="style-scope tp-yt-iron-icon"
             style={iconStyles}
-            fill="#909090"
+            fill={color}
         >
             <g className="style-scope tp-yt-iron-icon">
                 <path
@@ -77,9 +77,10 @@ const ShareIcon = () => {
             style={{
                 pointerEvents: "none",
                 display: "inline",
-                fontSize: "25px",
+                width: "25px",
+                height: "25px",
             }}
-            fill="#909090"
+            fill="black"
         >
             <g mirror-in-rtl="" className="style-scope yt-icon">
                 <path
@@ -90,4 +91,4 @@ const ShareIcon = () => {
         </svg>
     );
 };
-export { SpeakerIcon, LoopIcon, ShuffleIcon };
+export { SpeakerIcon, LoopIcon, ShuffleIcon, ShareIcon };

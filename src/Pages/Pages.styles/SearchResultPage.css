@@ -1,0 +1,9 @@
+.searchpage-container {
+    width: 80%;
+    min-height: 90vh;
+    background-color: aquamarine;
+    margin-left: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}

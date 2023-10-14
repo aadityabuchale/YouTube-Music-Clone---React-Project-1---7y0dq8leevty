@@ -1,5 +1,17 @@
 .profile-container {
     min-width: 100%;
     min-height: 90vh;
-    background-color: aquamarine;
+    /* background-color: aquamarine; */
+}
+
+.songs-heading {
+    font-family: "yt-sans-bold";
+    font-size: 2vmax;
+    margin-bottom: 40px;
+    margin-left: 4vmax;
+}
+
+.songs-container {
+    width: 80%;
+    margin-left: 4vmax;
 }

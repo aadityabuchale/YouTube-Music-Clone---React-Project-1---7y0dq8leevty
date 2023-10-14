@@ -43,7 +43,7 @@ export default UpgradePageBanners;
 function UpgradePageBanner({ bannerImg, heading, text, floatPos }) {
     return (
         <div
-            className="banner-container"
+            className="upgradebanner-container"
             style={{ backgroundImage: `url(${bannerImg})` }}
         >
             <div

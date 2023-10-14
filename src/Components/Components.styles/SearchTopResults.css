@@ -1,0 +1,49 @@
+.topresults-container {
+    width: 50%;
+    height: 250px;
+    background-repeat: no-repeat;
+    background-position: top;
+    background-size: cover;
+    border-radius: 12px;
+    position: relative;
+}
+
+.blur-div {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    backdrop-filter: blur(15px);
+    background: radial-gradient(circle, transparent, rgb(31, 31, 31));
+    border-radius: 11px;
+}
+
+.topresults-data {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    position: relative;
+    /* background-color: red; */
+    z-index: 10;
+}
+
+.topresults-container img {
+    width: 150px;
+    height: 150px;
+    border-radius: 7px;
+}
+
+.topresults-title {
+    font-size: 2.3vmax;
+    font-family: "yt-sans-bold";
+    font-weight: bold;
+}
+
+.topresults-text-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}

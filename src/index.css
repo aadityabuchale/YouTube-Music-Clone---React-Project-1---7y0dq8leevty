@@ -28,3 +28,10 @@
     list-style-type: none;
     color: var(--text-color);
 }
+
+.ytsans-heading {
+    font-family: "yt-sans-bold";
+    font-weight: bold;
+    font-size: 2vmax;
+    margin: 15px 0;
+}
