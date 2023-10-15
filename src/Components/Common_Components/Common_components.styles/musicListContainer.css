@@ -1,0 +1,14 @@
+.musiclist-container {
+    width: 100%;
+}
+
+.songs-heading {
+    font-family: "yt-sans-bold";
+    font-size: 2vmax;
+    margin-bottom: 30px;
+}
+
+.songs-container {
+    width: 90%;
+    margin-bottom: 20px;
+}

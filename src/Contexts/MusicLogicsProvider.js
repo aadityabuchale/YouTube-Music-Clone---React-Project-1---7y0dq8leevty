@@ -10,9 +10,9 @@ function MusicLogicsProvider({ children }) {
     const intialSearchState = {
         searchPage: "inactive",
         searchInput: "a",
-        artistResult: [],
-        songResult: [],
-        albumResult: [],
+        artistsResult: [],
+        songsResult: [],
+        albumsResult: [],
     };
 
     function searchReducer(state, action) {
@@ -20,14 +20,14 @@ function MusicLogicsProvider({ children }) {
             case "setSearchInput":
                 return { ...state, searchInput: action.payload };
 
-            case "setArtistResult":
-                return { ...state, artistResult: action.payload };
+            case "setartistsResult":
+                return { ...state, artistsResult: action.payload };
 
-            case "setSongResult":
-                return { ...state, songResult: action.payload };
+            case "setsongsResult":
+                return { ...state, songsResult: action.payload };
 
-            case "setAlbumResult":
-                return { ...state, albumResult: action.payload };
+            case "setalbumsResult":
+                return { ...state, albumsResult: action.payload };
         }
     }
 
@@ -36,27 +36,38 @@ function MusicLogicsProvider({ children }) {
         intialSearchState
     );
 
-    const { searchInput, searchPage, artistResult, songResult, albumResult } =
-        searchState;
+    const {
+        searchInput,
+        searchPage,
+        artistsResult,
+        songsResult,
+        albumsResult,
+    } = searchState;
 
     useEffect(() => {
         const fetchData = async () => {
             const songsData = await getSearchResult(searchInput, "song");
 
-            searchDispatch({ type: "setSongResult", payload: songsData });
+            searchDispatch({ type: "setsongsResult", payload: songsData });
 
             const albumsData = await getSearchResult(searchInput, "album");
-            searchDispatch({ type: "setAlbumResult", payload: albumsData });
+            searchDispatch({ type: "setalbumsResult", payload: albumsData });
 
             const artistsData = await getSearchResult(searchInput, "artist");
-            searchDispatch({ type: "setArtistResult", payload: artistsData });
+            searchDispatch({ type: "setartistsResult", payload: artistsData });
         };
         fetchData();
     }, [searchInput]);
 
     return (
         <MusicLogic.Provider
-            value={{ songResult, searchInput, searchDispatch }}
+            value={{
+                songsResult,
+                artistsResult,
+                albumsResult,
+                searchInput,
+                searchDispatch,
+            }}
         >
             {children}
         </MusicLogic.Provider>

@@ -7,8 +7,8 @@ import MoreVertOutlinedIcon from "@mui/icons-material/MoreVertOutlined";
 import ThumbUpOffAltOutlinedIcon from "@mui/icons-material/ThumbUpOffAltOutlined";
 import ThumbDownAltOutlinedIcon from "@mui/icons-material/ThumbDownAltOutlined";
 
-function SmallSizeCard({ song, count, isProfileCard }) {
-    const { _id, thumbnail, title, artist } = song;
+function SmallSizeCard({ song, count, isProfileCard, musicType }) {
+    const { _id, thumbnail, title, artist, image, name, description } = song;
     const { musicDispatch } = useMusic();
 
     return (
@@ -33,7 +33,14 @@ function SmallSizeCard({ song, count, isProfileCard }) {
                         zIndex: "5",
                     }}
                 />
-                <img src={thumbnail} alt="" />
+                <img
+                    src={
+                        musicType === "album" || musicType === "artist"
+                            ? image
+                            : thumbnail
+                    }
+                    alt=""
+                />
             </div>
 
             {!isProfileCard && (
@@ -57,13 +64,19 @@ function SmallSizeCard({ song, count, isProfileCard }) {
                     className="smusic-name"
                     style={{ width: isProfileCard && "50%" }}
                 >
-                    <b>{title}</b>
+                    <b>
+                        {musicType === "song" || musicType === "album"
+                            ? title
+                            : name}
+                    </b>
                 </p>
                 <p className="smusic-artist">
-                    {artist
-                        ?.map((a) => a.name)
-                        .slice(0, 2)
-                        .join(", ")}
+                    {musicType === "album" || musicType === "song"
+                        ? artist
+                              ?.map((a) => a.name)
+                              .slice(0, 2)
+                              .join(", ")
+                        : description?.substring(0, 25) + "..."}
                 </p>
             </div>
         </div>

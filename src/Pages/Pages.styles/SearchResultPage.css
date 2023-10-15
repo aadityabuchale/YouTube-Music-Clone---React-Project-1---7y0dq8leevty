@@ -1,9 +1,11 @@
 .searchpage-container {
-    width: 80%;
+    width: 70%;
     min-height: 90vh;
-    background-color: aquamarine;
-    margin-left: 10px;
+    margin-bottom: 100px;
+    /* background-color: aquamarine; */
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    align-items: flex-start;
+    gap: 5px;
+    margin-left: 8vmax;
 }
