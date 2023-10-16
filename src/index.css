@@ -1,16 +1,16 @@
 @font-face {
     font-family: "yt-sans-regular";
-    src: url(../public/fonts/YouTubeSansRegular.otf);
+    src: url(../assets/fonts/YouTubeSansRegular.otf);
 }
 
 @font-face {
     font-family: "yt-sans-bold";
-    src: url(../public/fonts/YouTubeSansBold.otf);
+    src: url(../assets/fonts/YouTubeSansBold.otf);
 }
 
 @font-face {
     font-family: "yt-sans-medium";
-    src: url(../public/fonts/YouTubeSansMedium.otf);
+    src: url(../assets/fonts/YouTubeSansMedium.otf);
 }
 
 :root {
