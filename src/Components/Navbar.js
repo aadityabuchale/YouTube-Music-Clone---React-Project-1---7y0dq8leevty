@@ -95,7 +95,7 @@ function Navbar() {
                         });
 
                         albumArtistDispatch({
-                            type: "setAlbumArtistpage",
+                            type: "setAlbumArtistPage",
                             payload: "inactive",
                         });
                     }}

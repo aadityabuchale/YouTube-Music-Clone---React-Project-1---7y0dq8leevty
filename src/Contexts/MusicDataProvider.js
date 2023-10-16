@@ -95,7 +95,7 @@ function MusicDataContextProvider({ children }) {
 
     //------------ fetching albums and artist data -------------
 
-    const intialAlbumArtistState = {
+    const initialAlbumArtistState = {
         albumArtistPage: "inactive",
         isAlbum: true,
         albumArtistId: "",
@@ -122,12 +122,15 @@ function MusicDataContextProvider({ children }) {
 
             case "setAlbumArtistSongsList":
                 return { ...state, albumArtistSongsList: action?.payload };
+
+            default:
+                return state;
         }
     }
 
     const [albumArtistState, albumArtistDispatch] = useReducer(
         AlbumArtistReducer,
-        intialAlbumArtistState
+        initialAlbumArtistState
     );
 
     const {
@@ -168,10 +171,10 @@ function MusicDataContextProvider({ children }) {
                 allMusicData,
                 setAllMusicData,
                 albumArtistDispatch,
-                albumArtistId,
                 albumArtistObject,
                 isAlbum,
                 albumArtistPage,
+                albumArtistId,
                 albumArtistSongsList,
             }}
         >

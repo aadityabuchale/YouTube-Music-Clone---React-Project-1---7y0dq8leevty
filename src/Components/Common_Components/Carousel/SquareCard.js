@@ -14,7 +14,6 @@ function SquareCard(props) {
         if (name && thumbnail) {
             musicDispatch({ type: "setMusicId", payload: _id });
         } else {
-            // console.log(_id);
             albumArtistDispatch({ type: "setAlbumArtistId", payload: _id });
 
             if (artists) {
@@ -22,9 +21,12 @@ function SquareCard(props) {
             } else {
                 albumArtistDispatch({ type: "setArtist" });
             }
-        }
 
-        albumArtistDispatch({ type: "setAlbumArtistpage", payload: "active" });
+            albumArtistDispatch({
+                type: "setAlbumArtistPage",
+                payload: "active",
+            });
+        }
     }
 
     return (

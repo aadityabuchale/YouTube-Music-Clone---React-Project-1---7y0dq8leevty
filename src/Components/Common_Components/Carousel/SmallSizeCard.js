@@ -7,15 +7,12 @@ import MoreVertOutlinedIcon from "@mui/icons-material/MoreVertOutlined";
 import ThumbUpOffAltOutlinedIcon from "@mui/icons-material/ThumbUpOffAltOutlined";
 import ThumbDownAltOutlinedIcon from "@mui/icons-material/ThumbDownAltOutlined";
 
-function SmallSizeCard({
-    song,
-    count,
-    isProfileCard,
-    musicType,
-    isSearchCard,
-}) {
-    const { _id, thumbnail, title, artist, image, name, description } = song;
+function SmallSizeCard({ song, count, isProfileCard, isSearchCard }) {
+    const { _id, thumbnail, title, artist, image, name, description, artists } =
+        song;
     const { musicDispatch } = useMusic();
+
+    console.log(artist);
 
     // setting styles conditionalliy according to card type we want for searchpage and for album or artist page card
     const musicCardStyles = isSearchCard
@@ -83,8 +80,12 @@ function SmallSizeCard({
                               ?.map((a) => a.name)
                               .slice(0, 2)
                               .join(", ")
-                        : description?.substring(0, isSearchCard ? 40 : 25) +
-                          "..."}
+                        : artists
+                        ? artists
+                              ?.map((a) => a.name)
+                              .slice(0, 2)
+                              .join(", ")
+                        : description?.substring(0, 25) + "..."}
                 </p>
             </div>
         </div>
