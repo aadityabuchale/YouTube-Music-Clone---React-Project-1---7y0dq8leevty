@@ -7,12 +7,12 @@ import LargeSizeButton from "./Common_Components/LargeSizeButton";
 function AlbumOrArtistPageHeader() {
     const { albumArtistObject, isArtist } = useMusicData();
 
-    const { image, title, name, description } = albumArtistObject;
+    const { image, thumbnail, title, name, description } = albumArtistObject;
 
     return (
         <section
             className="profile-header-container"
-            style={{ backgroundImage: `url(${image})` }}
+            style={{ backgroundImage: `url(${image ? image : thumbnail})` }}
         >
             <div className="black-bg"></div>
             <div className="profile-header">

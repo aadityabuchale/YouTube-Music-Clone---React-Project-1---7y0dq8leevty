@@ -1,9 +1,11 @@
 .searchresults-container {
     width: 100%;
     height: calc(400px - 45px);
-    /* background-color: aquamarine; */
-    margin-top: 3px;
+    background-color: #292929;
+    margin-top: -4px;
     overflow: hidden;
+    border-bottom-left-radius: 0.3rem;
+    border-bottom-right-radius: 0.3rem;
 }
 
 .result-container {

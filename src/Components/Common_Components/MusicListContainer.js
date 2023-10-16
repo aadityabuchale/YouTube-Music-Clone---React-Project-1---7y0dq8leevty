@@ -21,13 +21,14 @@ function MusicListContainer({ heading, musicList, isSearchList, musicType }) {
                             count={idx + 1}
                             isProfileCard="true"
                             musicType={musicType}
+                            isSearchCard={true}
                         />
                     );
                 })}
             </div>
-            {isSearchList && listCount === 5 && (
+            {isSearchList && musicList.length >= 5 && (
                 <LargeSizeButton setListCount={setListCount}>
-                    Show All
+                    {listCount >= 15 ? "Show Less" : "Show More"}
                 </LargeSizeButton>
             )}
         </section>

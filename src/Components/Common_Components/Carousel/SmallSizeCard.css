@@ -54,6 +54,10 @@
     /* background-color: red; */
 }
 
+.searchpage-music-details {
+    min-width: 80%;
+}
+
 .profilecard-music-details {
     display: flex;
     align-items: center;

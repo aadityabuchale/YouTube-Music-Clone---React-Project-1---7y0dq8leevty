@@ -32,7 +32,7 @@ function Home() {
             <MusicCarousel
                 heading={"Top Artists"}
                 musicType={"stars"}
-                cardType={"artist"}
+                cardType={"square"}
             />
 
             <MusicCarousel

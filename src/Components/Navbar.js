@@ -6,11 +6,13 @@ import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import { MusicDataContext } from "../Contexts/MusicDataProvider";
 
 import "./Components.styles/Navbar.css";
+import { useMusicLogic } from "../Contexts/MusicLogicsProvider";
 
 function Navbar() {
     const [navExpanded, setNavExpanded] = useState(true);
-    const { selectedNavItem, setSelectedNavItem } =
+    const { selectedNavItem, setSelectedNavItem, albumArtistDispatch } =
         useContext(MusicDataContext);
+    const { searchDispatch } = useMusicLogic();
 
     // navarray which contains all components and current states
     const navArray = [
@@ -77,7 +79,27 @@ function Navbar() {
                     onClick={() => setNavExpanded((expanded) => !expanded)}
                 ></MenuOutlinedIcon>
 
-                <img src="./images/on_platform_logo_dark.svg" alt="logo-img" />
+                <img
+                    src="./images/on_platform_logo_dark.svg"
+                    alt="logo-img"
+                    onClick={() => {
+                        // temperory redireting
+                        setSelectedNavItem("Home");
+                        searchDispatch({
+                            type: "setSearchPage",
+                            payload: "inactive",
+                        });
+                        searchDispatch({
+                            type: "setSearchResultBox",
+                            payload: "inactive",
+                        });
+
+                        albumArtistDispatch({
+                            type: "setAlbumArtistpage",
+                            payload: "inactive",
+                        });
+                    }}
+                />
             </div>
 
             {navArray.map((item, index) => (

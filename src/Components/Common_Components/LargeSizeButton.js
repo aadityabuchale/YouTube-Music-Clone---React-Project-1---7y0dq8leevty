@@ -34,7 +34,15 @@ function LargeSizeButton({ icon, children, setListCount }) {
           };
 
     return (
-        <Button size="large" sx={buttonStyles} onClick={() => setListCount(20)}>
+        <Button
+            size="large"
+            sx={buttonStyles}
+            onClick={() =>
+                setListCount((cnt) => {
+                    return cnt === 5 ? 20 : 5;
+                })
+            }
+        >
             {icon}
             {children}
         </Button>

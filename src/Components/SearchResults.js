@@ -1,36 +1,117 @@
 import React from "react";
 import "./Components.styles/SearchResults.css";
 import { useMusicLogic } from "../Contexts/MusicLogicsProvider";
-import { useMusicData } from "../Contexts/MusicDataProvider";
-import { HistoryIcon, DeleteIcon } from "../svgs/SearchHistorySvgs";
+
+import { HistoryIcon, DeleteIcon, SearchIcon } from "../svgs/SearchHistorySvgs";
+import addInLocalStorage from "../utils/addHistoryInLocalStorage";
+import deleteHistoryFromLocalStorage from "../utils/deleteHistoryFromLocalStorage";
+import getHistoryFromLocalStorage from "../utils/getHistoryFromLocaltorage";
 
 function SearchResults() {
-    const { songResult } = useMusicLogic();
+    const { songsResult, albumsResult, artistsResult, searchInput } =
+        useMusicLogic();
+
+    const historyArray = getHistoryFromLocalStorage();
+
+    // getting total length of search results
+    let totalLength = songsResult?.length
+        ? songsResult?.length
+        : 0 + albumsResult?.length
+        ? albumsResult?.length
+        : 0 + artistsResult?.length
+        ? artistsResult?.length
+        : 0;
 
     return (
-        <div className="searchresults-container">
-            {songResult?.map((song) => {
-                return <SingleSearchResult song={song} />;
-            })}
+        <div
+            className="searchresults-container"
+            style={{
+                height:
+                    totalLength < 7 || searchInput?.length === 0
+                        ? "fit-content"
+                        : "calc(400px - 45px)",
+            }}
+        >
+            {/* if there is a word inside search input then we show searchresult otherwise search history */}
+            {searchInput?.length > 0 ? (
+                <>
+                    {" "}
+                    {songsResult?.map((song) => {
+                        return (
+                            <SingleSearchResult key={song?._id} result={song} />
+                        );
+                    })}
+                    {albumsResult?.map((album) => {
+                        return (
+                            <SingleSearchResult
+                                key={album?._id}
+                                result={album}
+                            />
+                        );
+                    })}
+                    {artistsResult?.map((artist) => {
+                        return (
+                            <SingleSearchResult
+                                key={artist?._id}
+                                result={artist}
+                            />
+                        );
+                    })}
+                </>
+            ) : (
+                historyArray.map((history, idx) => {
+                    return (
+                        <SingleSearchResult
+                            key={idx}
+                            history={history}
+                            isHistory="true"
+                        />
+                    );
+                })
+            )}
         </div>
     );
 }
 
 export default SearchResults;
 
-function SingleSearchResult({ song }) {
-    const { name, title } = song;
+function SingleSearchResult({ result, isHistory, history }) {
+    const { searchDispatch, searchInput } = useMusicLogic();
 
-    // console.log(title);
+    // handling when search history is clicked
+    function handleSearchResultClick(e) {
+        if (!e.target.classList.contains("showSearchResults")) {
+            searchDispatch({ type: "setSearchResultBox", payload: "inactive" });
+            searchDispatch({ type: "setSearchInput", payload: history });
+        }
+        addInLocalStorage(searchInput);
+        searchDispatch({ type: "setSearchPage", payload: "active" });
+    }
+
+    function handleDeleteHistory() {
+        deleteHistoryFromLocalStorage(history);
+    }
 
     return (
-        <div className="result-container">
+        <div
+            className="result-container"
+            onClick={(e) => handleSearchResultClick(e)}
+        >
             <div className="searchresult-icon">
-                <HistoryIcon />
+                {isHistory ? <HistoryIcon /> : <SearchIcon />}
             </div>
-            <div className="result-text">{title}</div>
-            <div className="searchresult-icon">
-                <DeleteIcon />
+            <div className="result-text">
+                {result?.title
+                    ? result?.title
+                    : isHistory
+                    ? history
+                    : result?.name}
+            </div>
+            <div
+                className="searchresult-icon showSearchResults"
+                onClick={handleDeleteHistory}
+            >
+                {isHistory && <DeleteIcon />}
             </div>
         </div>
     );

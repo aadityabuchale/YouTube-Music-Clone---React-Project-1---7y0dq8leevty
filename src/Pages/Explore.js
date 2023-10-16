@@ -11,7 +11,7 @@ const Explore = () => {
             <MusicCarousel
                 heading={"New Albums and Singles"}
                 musicType={"trendPlay"}
-                cardType={"album"}
+                cardType={"square"}
             />
 
             <MusicCarousel
@@ -23,7 +23,7 @@ const Explore = () => {
             <MusicCarousel
                 heading={"New Musics"}
                 musicType={"trendPlay"}
-                cardType={"albumWithRectangle"}
+                cardType={"square"}
                 isReverse={true}
             />
         </section>

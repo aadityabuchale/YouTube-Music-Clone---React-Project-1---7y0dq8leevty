@@ -8,8 +8,9 @@ import React from "react";
 function MusicLogicsProvider({ children }) {
     // ----------- start of search functionality --------------------
     const intialSearchState = {
-        searchPage: "inactive",
-        searchInput: "a",
+        searchPageStatus: "inactive",
+        searchResultBoxStatus: "inactive",
+        searchInput: "",
         artistsResult: [],
         songsResult: [],
         albumsResult: [],
@@ -21,13 +22,28 @@ function MusicLogicsProvider({ children }) {
                 return { ...state, searchInput: action.payload };
 
             case "setartistsResult":
-                return { ...state, artistsResult: action.payload };
+                return {
+                    ...state,
+                    artistsResult: !action.payload ? [] : action.payload,
+                };
 
             case "setsongsResult":
-                return { ...state, songsResult: action.payload };
+                return {
+                    ...state,
+                    songsResult: !action.payload ? [] : action.payload,
+                };
 
             case "setalbumsResult":
-                return { ...state, albumsResult: action.payload };
+                return {
+                    ...state,
+                    albumsResult: !action.payload ? [] : action.payload,
+                };
+
+            case "setSearchPage":
+                return { ...state, searchPageStatus: action.payload };
+
+            case "setSearchResultBox":
+                return { ...state, searchResultBoxStatus: action.payload };
         }
     }
 
@@ -38,16 +54,16 @@ function MusicLogicsProvider({ children }) {
 
     const {
         searchInput,
-        searchPage,
+        searchPageStatus,
         artistsResult,
         songsResult,
         albumsResult,
+        searchResultBoxStatus,
     } = searchState;
 
     useEffect(() => {
         const fetchData = async () => {
             const songsData = await getSearchResult(searchInput, "song");
-
             searchDispatch({ type: "setsongsResult", payload: songsData });
 
             const albumsData = await getSearchResult(searchInput, "album");
@@ -67,6 +83,8 @@ function MusicLogicsProvider({ children }) {
                 albumsResult,
                 searchInput,
                 searchDispatch,
+                searchPageStatus,
+                searchResultBoxStatus,
             }}
         >
             {children}
@@ -75,7 +93,13 @@ function MusicLogicsProvider({ children }) {
 }
 
 function useMusicLogic() {
-    return useContext(MusicLogic);
+    const obj = useContext(MusicLogic);
+
+    if (obj === undefined) {
+        console.log("trying to access data outside MusicLogic context");
+    } else {
+        return obj;
+    }
 }
 
 export default MusicLogicsProvider;

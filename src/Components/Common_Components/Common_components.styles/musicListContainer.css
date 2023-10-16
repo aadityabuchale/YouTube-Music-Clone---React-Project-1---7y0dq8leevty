@@ -1,14 +1,17 @@
 .musiclist-container {
     width: 100%;
+    margin-bottom: 35px;
+    /* background-color: aqua; */
+    transition: 0.8s all ease-in-out;
 }
 
 .songs-heading {
     font-family: "yt-sans-bold";
     font-size: 2vmax;
-    margin-bottom: 30px;
+    margin-bottom: 15px;
 }
 
 .songs-container {
-    width: 90%;
+    width: 100%;
     margin-bottom: 20px;
 }

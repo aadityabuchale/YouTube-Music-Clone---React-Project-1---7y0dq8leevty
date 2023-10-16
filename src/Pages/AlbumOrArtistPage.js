@@ -6,14 +6,14 @@ import SmallSizeCard from "../Components/Common_Components/Carousel/SmallSizeCar
 import MusicListContainer from "../Components/Common_Components/MusicListContainer";
 
 function AlbumOrArtistPage() {
-    const { allMusicData } = useMusicData();
+    const { albumArtistSongsList } = useMusicData();
 
     return (
         <main className="profile-container">
             <AlbumOrArtistPageHeader />
             <MusicListContainer
                 heading={"Songs"}
-                musicList={allMusicData[4].data}
+                musicList={albumArtistSongsList}
             />
         </main>
     );

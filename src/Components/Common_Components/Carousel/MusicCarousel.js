@@ -9,8 +9,6 @@ import "./MusicCarousel.css";
 import RectangleCard from "./RectangleCard";
 import SquareCard from "./SquareCard";
 import SmallSizeCard from "./SmallSizeCard";
-import ArtistsCard from "./ArtistsCard";
-import AlbumCard from "./AlbumCard";
 
 const MusicCarousel = ({ heading, musicType, cardType, isReverse }) => {
     const { allMusicData } = useContext(MusicDataContext);
@@ -191,11 +189,16 @@ const MusicCarousel = ({ heading, musicType, cardType, isReverse }) => {
                                     <RectangleCard
                                         song={song}
                                         key={song?._id}
+                                        cardType={cardType}
                                     />
                                 )}
                                 {/* card rendering for squre shape */}
                                 {cardType === "square" && (
-                                    <SquareCard song={song} key={song?._id} />
+                                    <SquareCard
+                                        song={song}
+                                        key={song?._id}
+                                        cardType={cardType}
+                                    />
                                 )}
                                 {/* small sized card rendering */}
                                 {cardType === "smallSize" && (
@@ -203,25 +206,7 @@ const MusicCarousel = ({ heading, musicType, cardType, isReverse }) => {
                                         song={song}
                                         key={song?._id}
                                         count={idx + 1}
-                                    />
-                                )}
-
-                                {/* artists card rendering */}
-                                {cardType === "artist" && (
-                                    <ArtistsCard
-                                        artist={song}
-                                        key={song?._id}
-                                    />
-                                )}
-                                {/* albums card rendering */}
-                                {(cardType === "album" ||
-                                    cardType === "albumWithRectangle") && (
-                                    <AlbumCard
-                                        album={song}
-                                        key={song?._id}
-                                        isRectangle={
-                                            cardType === "albumWithRectangle"
-                                        }
+                                        cardType={cardType}
                                     />
                                 )}
                             </React.Fragment>

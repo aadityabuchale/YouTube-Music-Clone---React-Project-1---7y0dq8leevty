@@ -1,6 +1,6 @@
 import React, { useContext, useReducer } from "react";
 import { createContext, useState, useEffect } from "react";
-import { getAlbumOrArtist, getSongsByCategory } from "../ApiService";
+import { getAlbumOrArtist, getMusic, getSongsByCategory } from "../ApiService";
 
 // creating a context
 const MusicDataContext = createContext({});
@@ -98,28 +98,30 @@ function MusicDataContextProvider({ children }) {
     const intialAlbumArtistState = {
         albumArtistPage: "inactive",
         isAlbum: true,
-        albumArtistId: "64cee72fe41f6d0a8b0cd0a8",
+        albumArtistId: "",
         albumArtistObject: {},
+        albumArtistSongsList: [],
     };
 
     function AlbumArtistReducer(state, action) {
         switch (action.type) {
             case "setAlbumArtistId":
-                return { ...state, albumArtistId: action.payload };
+                return { ...state, albumArtistId: action?.payload };
 
             case "setAlbumArtistData":
-                return { ...state, albumArtistObject: action.payload };
+                return { ...state, albumArtistObject: action?.payload };
 
             case "setAlbumArtistPage":
-                return { ...state, albumArtistPage: "active" };
+                return { ...state, albumArtistPage: action.payload };
 
-            case "hideAlbumArtistPage":
-                return { ...state, albumArtistPage: "inactive" };
             case "setArtist":
                 return { ...state, isAlbum: false };
 
             case "setAlbum":
                 return { ...state, isAlbum: true };
+
+            case "setAlbumArtistSongsList":
+                return { ...state, albumArtistSongsList: action?.payload };
         }
     }
 
@@ -128,16 +130,28 @@ function MusicDataContextProvider({ children }) {
         intialAlbumArtistState
     );
 
-    const { albumArtistId, albumArtistObject, albumArtistPage, isAlbum } =
-        albumArtistState;
+    const {
+        albumArtistId,
+        albumArtistObject,
+        albumArtistPage,
+        isAlbum,
+        albumArtistSongsList,
+    } = albumArtistState;
 
     useEffect(() => {
         let fetch = async () => {
             const data = await getAlbumOrArtist(albumArtistId, isAlbum);
 
+            // console.log(albumArtistId, data);
+
             albumArtistDispatch({
                 type: "setAlbumArtistData",
                 payload: data,
+            });
+
+            albumArtistDispatch({
+                type: "setAlbumArtistSongsList",
+                payload: data?.songs,
             });
         };
 
@@ -154,9 +168,11 @@ function MusicDataContextProvider({ children }) {
                 allMusicData,
                 setAllMusicData,
                 albumArtistDispatch,
+                albumArtistId,
                 albumArtistObject,
                 isAlbum,
                 albumArtistPage,
+                albumArtistSongsList,
             }}
         >
             {children}
@@ -165,7 +181,13 @@ function MusicDataContextProvider({ children }) {
 }
 
 function useMusicData() {
-    return useContext(MusicDataContext);
+    const obj = useContext(MusicDataContext);
+
+    if (!obj) {
+        console.log("Accessing context outside limits");
+        return;
+    }
+    return obj;
 }
 
 // exporting stuff
