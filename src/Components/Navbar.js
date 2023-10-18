@@ -80,7 +80,7 @@ function Navbar() {
                 ></MenuOutlinedIcon>
 
                 <img
-                    src="./images/on_platform_logo_dark.png"
+                    src="./images/on_platform_logo_dark.svg"
                     alt="logo-img"
                     onClick={() => {
                         // temperory redireting

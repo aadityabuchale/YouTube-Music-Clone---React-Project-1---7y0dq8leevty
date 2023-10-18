@@ -12,7 +12,7 @@ function SmallSizeCard({ song, count, isProfileCard, isSearchCard }) {
         song;
     const { musicDispatch } = useMusic();
 
-    console.log(artist);
+    // console.log(artist);
 
     // setting styles conditionalliy according to card type we want for searchpage and for album or artist page card
     const musicCardStyles = isSearchCard
@@ -92,4 +92,4 @@ function SmallSizeCard({ song, count, isProfileCard, isSearchCard }) {
     );
 }
 
-export default SmallSizeCard;
+export default React.memo(SmallSizeCard);
