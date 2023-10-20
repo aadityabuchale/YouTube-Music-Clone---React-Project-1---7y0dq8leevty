@@ -16,7 +16,7 @@ function AlbumOrArtistPageHeader() {
         >
             <div className="black-bg"></div>
             <div className="profile-header">
-                <div className="profile-name">{isArtist ? name : title}</div>
+                <div className="profile-name">{name ? name : title}</div>
                 <div className="description">{description}</div>
                 <div className="button-container">
                     <LargeSizeButton

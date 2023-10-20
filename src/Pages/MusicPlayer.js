@@ -14,6 +14,7 @@ function MusicPlayer() {
         <main className="musicplayer-section">
             <MusicPlayerBanner imgSrc={thumbnail} />
             <MusicPlayerQueue />
+            <MusicPlayerController />
         </main>
     );
 }

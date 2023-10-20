@@ -54,6 +54,10 @@
     /* background-color: red; */
 }
 
+.smusic-artist {
+    color: #909090;
+}
+
 .searchpage-music-details {
     min-width: 80%;
 }

@@ -187,7 +187,7 @@ function useMusicData() {
     const obj = useContext(MusicDataContext);
 
     if (!obj) {
-        console.log("Accessing context outside limits");
+        console.log("Accessing Music Data context outside limits");
         return;
     }
     return obj;

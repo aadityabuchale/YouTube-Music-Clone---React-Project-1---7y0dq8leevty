@@ -16,8 +16,6 @@ const MusicCarousel = ({ heading, musicType, cardType, isReverse }) => {
 
     const myRef = createRef();
 
-    // console.log(isReverse);
-
     function handleDataForRender(data) {
         let tempData = [...data];
 
@@ -190,6 +188,7 @@ const MusicCarousel = ({ heading, musicType, cardType, isReverse }) => {
                                         song={song}
                                         key={song?._id}
                                         cardType={cardType}
+                                        musicList={musicListToRender}
                                     />
                                 )}
                                 {/* card rendering for squre shape */}
@@ -198,6 +197,7 @@ const MusicCarousel = ({ heading, musicType, cardType, isReverse }) => {
                                         song={song}
                                         key={song?._id}
                                         cardType={cardType}
+                                        musicList={musicListToRender}
                                     />
                                 )}
                                 {/* small sized card rendering */}
@@ -207,6 +207,7 @@ const MusicCarousel = ({ heading, musicType, cardType, isReverse }) => {
                                         key={song?._id}
                                         count={idx + 1}
                                         cardType={cardType}
+                                        musicList={musicListToRender}
                                     />
                                 )}
                             </React.Fragment>
@@ -217,4 +218,4 @@ const MusicCarousel = ({ heading, musicType, cardType, isReverse }) => {
     );
 };
 
-export default MusicCarousel;
+export default React.memo(MusicCarousel);

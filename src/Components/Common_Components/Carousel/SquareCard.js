@@ -12,7 +12,12 @@ function SquareCard(props) {
 
     function handleCardClick(e) {
         if (name && thumbnail) {
-            musicDispatch({ type: "setMusicId", payload: _id });
+            musicDispatch({
+                type: "setMusicId",
+                payload: _id,
+                songsList: props.musicList,
+            });
+            musicDispatch({ type: "setMusicPlayer", payload: "active" });
         } else {
             albumArtistDispatch({ type: "setAlbumArtistId", payload: _id });
 
@@ -68,4 +73,4 @@ function SquareCard(props) {
     );
 }
 
-export default SquareCard;
+export default React.memo(SquareCard);

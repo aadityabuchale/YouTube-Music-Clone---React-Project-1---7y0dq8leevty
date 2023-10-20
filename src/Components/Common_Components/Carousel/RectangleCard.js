@@ -6,11 +6,21 @@ import { useMusic } from "../../../Contexts/MusicPlayerProvider";
 function RectangleCard(props) {
     const { _id, thumbnail, title, artist } = props.song;
     const { musicDispatch } = useMusic();
+
+    function handleOpenMusicPlayer() {
+        musicDispatch({
+            type: "setMusicId",
+            payload: _id,
+            songsList: props.musicList,
+        });
+        musicDispatch({ type: "setMusicPlayer", payload: "active" });
+    }
+
     return (
         <div
             key={_id}
             className="rmusic-card"
-            onClick={() => musicDispatch({ type: "setMusicId", payload: _id })}
+            onClick={() => handleOpenMusicPlayer()}
         >
             <div className="rimage">
                 <PlayArrowSharpIcon

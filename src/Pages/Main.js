@@ -10,20 +10,24 @@ import MusicPlayer from "./MusicPlayer";
 import AlbumOrArtistPage from "./AlbumOrArtistPage";
 import SearchResultPage from "./SearchResultPage";
 import { useMusicLogic } from "../Contexts/MusicLogicsProvider";
+import { useMusic } from "../Contexts/MusicPlayerProvider";
+import MusicPlayerController from "../Components/MusicPlayerController";
 
-function Main() {
+function Main({ children }) {
     const { selectedNavItem } = useContext(MusicDataContext);
     const { searchPageStatus } = useMusicLogic();
     const { albumArtistPage } = useMusicData();
+    const { musicPlayer } = useMusic();
 
     return (
         <div className="main">
             <Header />
 
             {/* rendering component accoding to selected component from navbar */}
-
+            {/* 
             {searchPageStatus === "inactive" &&
-                albumArtistPage === "inactive" && (
+                albumArtistPage === "inactive" &&
+                musicPlayer === "inactive" && (
                     <>
                         {" "}
                         {selectedNavItem === "Explore" && <Explore />}
@@ -31,12 +35,15 @@ function Main() {
                         {selectedNavItem === "Library" && <Library />}
                         {selectedNavItem === "Upgrade" && <Upgrade />}
                     </>
-                )}
-            {/* <MusicPlayer /> */}
+                )} */}
+
             {/* <AlbumOrArtistPage /> */}
+
+            {children}
 
             {searchPageStatus === "active" && <SearchResultPage />}
             {albumArtistPage === "active" && <AlbumOrArtistPage />}
+            {musicPlayer === "active" && <MusicPlayer />}
         </div>
     );
 }

@@ -26,6 +26,18 @@ function MusicPlayerController() {
 
     let artistName = artist && artist?.map((a) => a.name)?.join(" & ");
 
+    const [songDuration, setSongDuration] = useState(0);
+
+    const [currMin, setCurrMin] = useState(0);
+    const [currSec, setCurrSec] = useState(0);
+    const [remainingMin, setRemainingMin] = useState(0);
+    const [remainaingSec, setRemainingSec] = useState(0);
+    const [playPercent, setPlayPercent] = useState(0);
+    const [isReady, setIsReady] = useState(false);
+
+    const [isLoop, setIsLoop] = useState(false);
+    const [isShuffle, setIsShuffle] = useState(false);
+
     // using use-sound hook
     const [play, { duration, pause, stop, sound }] = useSound(audioUrl, {
         format: "mp3",
@@ -47,9 +59,9 @@ function MusicPlayerController() {
     }, [musicId]);
 
     // checking for second time render
-
     useEffect(() => {
         if (duration > 0) {
+            resetTiming();
             if (isFirstRender.current) {
                 isFirstRender.current = false;
                 return;
@@ -72,6 +84,106 @@ function MusicPlayerController() {
             }
         }
     }, [musicStatus]);
+
+    //---------------- logic for changing duration of song ------------------
+
+    function resetTiming() {
+        setSongDuration((duration - (duration % 1000)) / 1000);
+        setCurrSec(0);
+        setCurrMin(0);
+        setPlayPercent(0);
+        if (duration >= 60000) {
+            let sec = duration / 1000 - Math.floor(duration / 60000) * 60;
+            sec = Math.floor(sec);
+            let min = Math.floor(duration / 60000);
+            setRemainingMin(min);
+            setRemainingSec(sec);
+        } else {
+            let sec = duration / 1000;
+            sec = Math.floor(sec);
+            setRemainingSec(sec);
+        }
+    }
+
+    useEffect(() => {
+        let timer;
+        if (musicStatus === "play") {
+            timer = setTimeout(() => {
+                // setting the percentage of duration
+                setPlayPercent((currMin + (currSec + 1) / songDuration) * 100);
+
+                // handling seconds
+                if (currSec < 59) {
+                    setCurrSec((prev) => prev + 1);
+                } else {
+                    setCurrSec(0);
+                    setCurrMin((prev) => prev + 1);
+                }
+                // handeling remaining seconds
+                if (remainaingSec > 1) {
+                    setRemainingSec((prev) => prev - 1);
+                } else {
+                    // if the time has ended
+                    if (remainaingSec === 1 && remainingMin === 0) {
+                        stop();
+                        resetTiming();
+
+                        // if loop is on
+                        if (isLoop) {
+                            play();
+                        }
+
+                        // if nextId is present
+                        else if (nextId) {
+                            dispatchPlayer({ type: "playNext" });
+                        }
+
+                        // shuffling is clicked
+                        else if (isShuffle && songsIds.length > 1) {
+                            // logic for shuffling the songs
+                            let current = Math.floor(
+                                Math.random() * songsIds.length
+                            );
+                            while (current === playIdx) {
+                                current = Math.floor(
+                                    Math.random() * songsIds.length
+                                );
+                            }
+
+                            dispatchPlayer({
+                                type: "ChangeSong",
+                                payload: current,
+                            });
+                        }
+                        // we are in between the lists
+                        else if (
+                            songsIds.length > 1 &&
+                            playIdx < songsIds.length - 1
+                        ) {
+                            dispatchPlayer({
+                                type: "ChangeSong",
+                                payload: playIdx + 1,
+                            });
+                        } else {
+                            dispatchPlayer({ type: "Play", payload: false });
+                        }
+                    } else {
+                        remainaingSec;
+                        setRemainingSec(59);
+                        if (remainingMin > 0) {
+                            setRemainingMin((prev) => prev - 1);
+                        }
+                    }
+                }
+            }, 1000);
+        } else {
+            clearTimeout(timer);
+        }
+
+        return () => {
+            clearTimeout(timer);
+        };
+    }, [remainaingSec, isReady, musicStatus]);
 
     //icon styles
     const iconStyles = {
@@ -114,7 +226,7 @@ function MusicPlayerController() {
 
                 <SkipNextIcon sx={iconStyles} />
                 <div className="music-duration">
-                    <span>{duration}</span>/ <span>02:00</span>
+                    <span>{currSec}</span>/ <span>{remainaingSec}</span>
                 </div>
             </div>
 
