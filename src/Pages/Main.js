@@ -24,26 +24,8 @@ function Main({ children }) {
             <Header />
 
             {/* rendering component accoding to selected component from navbar */}
-            {/* 
-            {searchPageStatus === "inactive" &&
-                albumArtistPage === "inactive" &&
-                musicPlayer === "inactive" && (
-                    <>
-                        {" "}
-                        {selectedNavItem === "Explore" && <Explore />}
-                        {selectedNavItem === "Home" && <Home />}
-                        {selectedNavItem === "Library" && <Library />}
-                        {selectedNavItem === "Upgrade" && <Upgrade />}
-                    </>
-                )} */}
-
-            {/* <AlbumOrArtistPage /> */}
 
             {children}
-
-            {searchPageStatus === "active" && <SearchResultPage />}
-            {albumArtistPage === "active" && <AlbumOrArtistPage />}
-            {musicPlayer === "active" && <MusicPlayer />}
         </div>
     );
 }

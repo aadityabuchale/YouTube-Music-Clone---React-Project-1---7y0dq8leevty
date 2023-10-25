@@ -88,3 +88,7 @@
     background-color: #2a2a2a !important;
     transition: all 0.2s ease-in-out;
 }
+
+.active {
+    background-color: #1e1e1e;
+}

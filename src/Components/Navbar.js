@@ -7,29 +7,27 @@ import { MusicDataContext } from "../Contexts/MusicDataProvider";
 
 import "./Components.styles/Navbar.css";
 import { useMusicLogic } from "../Contexts/MusicLogicsProvider";
+import { NavLink, useNavigate } from "react-router-dom";
+import { useMusic } from "../Contexts/MusicPlayerProvider";
 
 function Navbar() {
     const [navExpanded, setNavExpanded] = useState(true);
-    const { selectedNavItem, setSelectedNavItem, albumArtistDispatch } =
-        useContext(MusicDataContext);
-    const { searchDispatch } = useMusicLogic();
+    const navigate = useNavigate();
+    const { handleMusicPlayer } = useMusic();
 
     // navarray which contains all components and current states
     const navArray = [
         {
             name: "Home",
             icon: <HomeSharpIcon />,
-            isClicked: selectedNavItem === "Home",
         },
         {
             name: "Explore",
             icon: <ExploreIcon />,
-            isClicked: selectedNavItem === "Explore",
         },
         {
             name: "Library",
             icon: <LibraryMusicSharpIcon />,
-            isClicked: selectedNavItem === "Library",
         },
         {
             name: "Upgrade",
@@ -54,7 +52,6 @@ function Navbar() {
                     </g>
                 </svg>
             ),
-            isClicked: selectedNavItem === "Upgrade",
         },
     ];
 
@@ -68,9 +65,10 @@ function Navbar() {
               transition: "all 0.6s ease-out",
           };
 
-    const handleNavClick = (name) => {
-        setSelectedNavItem(name);
-    };
+    function handleNavbarClick() {
+        handleMusicPlayer("keepAsItIs", "inactive", "active");
+        navigate("/");
+    }
 
     return (
         <nav className={"navbar"} style={navbarStyle}>
@@ -82,40 +80,20 @@ function Navbar() {
                 <img
                     src="./images/on_platform_logo_dark.svg"
                     alt="logo-img"
-                    onClick={() => {
-                        // temperory redireting
-                        setSelectedNavItem("Home");
-                        searchDispatch({
-                            type: "setSearchPage",
-                            payload: "inactive",
-                        });
-                        searchDispatch({
-                            type: "setSearchResultBox",
-                            payload: "inactive",
-                        });
-
-                        albumArtistDispatch({
-                            type: "setAlbumArtistPage",
-                            payload: "inactive",
-                        });
-                    }}
+                    onClick={handleNavbarClick}
                 />
             </div>
 
+            {/* rendering the links */}
             {navArray.map((item, index) => (
-                <div
+                <NavLink
+                    to={item.name == "Home" ? "/" : item.name}
                     key={index}
                     className={navStyle}
-                    style={{
-                        backgroundColor: item.isClicked
-                            ? "#1e1e1e"
-                            : "var(--primary-color)",
-                    }}
-                    onClick={() => handleNavClick(item.name)}
                 >
                     {item.icon}
                     <span>{item.name}</span>
-                </div>
+                </NavLink>
             ))}
         </nav>
     );

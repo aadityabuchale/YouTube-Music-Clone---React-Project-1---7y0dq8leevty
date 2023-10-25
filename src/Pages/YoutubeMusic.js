@@ -11,9 +11,14 @@ import Home from "./Home";
 import Explore from "./Explore";
 import Library from "./Library";
 import Upgrade from "./Upgrade";
+import AlbumOrArtistPage from "./AlbumOrArtistPage";
+import MusicPlayer from "./MusicPlayer";
+import MusicPlayerBanner from "../Components/MusicPlayerBanner";
+import SearchResultPage from "./SearchResultPage";
 
 function YoutubeMusic() {
     const { searchDispatch } = useMusicLogic();
+    const { musicController, musicPlayer } = useMusic();
 
     function handleAppClick(e) {
         if (
@@ -30,11 +35,32 @@ function YoutubeMusic() {
             <Main>
                 <Routes>
                     <Route path="/" element={<Home />} />
-                    <Route path="explore" element={<Explore />} />
-                    <Route path="upgrade" element={<Upgrade />} />
-                    <Route path="library" element={<Library />} />
+                    <Route path="Explore" element={<Explore />} />
+                    <Route path="Upgrade" element={<Upgrade />} />
+                    <Route path="Library" element={<Library />} />
+
+                    <Route
+                        path="playlist/:profileType/:id"
+                        element={<AlbumOrArtistPage />}
+                    ></Route>
+
+                    <Route
+                        path="musicPlayer/:id"
+                        element={<MusicPlayer />}
+                    ></Route>
+                    <Route path="*" element={<Home />}></Route>
+
+                    <Route
+                        path="searchpage/:input"
+                        element={<SearchResultPage />}
+                    ></Route>
                 </Routes>
             </Main>
+
+            {musicPlayer === "inactive" && musicController === "active" && (
+                <MusicPlayerBanner />
+            )}
+            {musicController === "active" && <MusicPlayerController />}
         </div>
     );
 }

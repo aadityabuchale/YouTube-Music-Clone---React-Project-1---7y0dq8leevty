@@ -6,8 +6,12 @@ import "./Components.styles/SearchBox.css";
 import addInLocalStorage from "../utils/addHistoryInLocalStorage";
 
 function SearchBox() {
-    const { searchDispatch, searchInput, searchResultBoxStatus } =
-        useMusicLogic();
+    const {
+        searchDispatch,
+        searchInput,
+        searchResultBoxStatus,
+        handleSearchpageOpen,
+    } = useMusicLogic();
 
     const searchInputRef = createRef();
 
@@ -25,13 +29,7 @@ function SearchBox() {
         if (e.key === "Enter") {
             if (searchInput !== "") {
                 // handling searchpage open and historylist close
-                searchDispatch({
-                    type: "setSearchResultBox",
-                    payload: "inactive",
-                });
-                searchDispatch({ type: "setSearchPage", payload: "active" });
-
-                addInLocalStorage(searchInput);
+                handleSearchpageOpen();
             }
         }
     }

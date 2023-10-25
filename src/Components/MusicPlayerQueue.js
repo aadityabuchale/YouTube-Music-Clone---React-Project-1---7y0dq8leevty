@@ -4,9 +4,9 @@ import SmallSizeCard from "./Common_Components/Carousel/SmallSizeCard";
 import { useMusic } from "../Contexts/MusicPlayerProvider";
 
 function MusicPlayerQueue() {
-    const { musicPlayerSongsList } = useMusic();
+    const { musicPlayerSongsList, musicObject } = useMusic();
 
-    console.log(musicPlayerSongsList);
+    // console.log(musicPlayerSongsList);
 
     return (
         <section className="music-queue-section">
@@ -17,6 +17,7 @@ function MusicPlayerQueue() {
                     return (
                         <SmallSizeCard
                             key={song._id}
+                            isCurrentSong={song?._id === musicObject?._id}
                             song={song}
                             count={idx + 1}
                             musicList={musicPlayerSongsList}

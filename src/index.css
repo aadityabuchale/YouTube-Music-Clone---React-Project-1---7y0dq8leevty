@@ -29,6 +29,10 @@
     color: var(--text-color);
 }
 
+body {
+    position: relative;
+}
+
 .ytsans-heading {
     font-family: "yt-sans-bold";
     font-weight: bold;

@@ -6,6 +6,7 @@ import { HistoryIcon, DeleteIcon, SearchIcon } from "../svgs/SearchHistorySvgs";
 import addInLocalStorage from "../utils/addHistoryInLocalStorage";
 import deleteHistoryFromLocalStorage from "../utils/deleteHistoryFromLocalStorage";
 import getHistoryFromLocalStorage from "../utils/getHistoryFromLocaltorage";
+import { useNavigate } from "react-router-dom";
 
 function SearchResults() {
     const { songsResult, albumsResult, artistsResult, searchInput } =
@@ -78,6 +79,8 @@ export default SearchResults;
 function SingleSearchResult({ result, isHistory, history }) {
     const { searchDispatch, searchInput } = useMusicLogic();
 
+    const navigate = useNavigate();
+
     // handling when search history is clicked
     function handleSearchResultClick(e) {
         if (!e.target.classList.contains("showSearchResults")) {
@@ -86,6 +89,8 @@ function SingleSearchResult({ result, isHistory, history }) {
         }
         addInLocalStorage(searchInput);
         searchDispatch({ type: "setSearchPage", payload: "active" });
+
+        navigate("../searchpage/" + history);
     }
 
     function handleDeleteHistory() {

@@ -4,8 +4,12 @@ import { getSearchResult } from "../ApiService";
 const MusicLogic = createContext();
 
 import React from "react";
+import { useNavigate } from "react-router-dom";
+import addHistoryInLocalStorage from "../utils/addHistoryInLocalStorage";
 
 function MusicLogicsProvider({ children }) {
+    const navigate = useNavigate();
+
     // ----------- start of search functionality --------------------
     const intialSearchState = {
         searchPageStatus: "inactive",
@@ -75,21 +79,23 @@ function MusicLogicsProvider({ children }) {
         fetchData();
     }, [searchInput]);
 
-    return (
-        <MusicLogic.Provider
-            value={{
-                songsResult,
-                artistsResult,
-                albumsResult,
-                searchInput,
-                searchDispatch,
-                searchPageStatus,
-                searchResultBoxStatus,
-            }}
-        >
-            {children}
-        </MusicLogic.Provider>
-    );
+    function handleSearchpageOpen() {
+        searchDispatch({
+            type: "setSearchResultBox",
+            payload: "inactive",
+        });
+        searchDispatch({ type: "setSearchPage", payload: "active" });
+        addHistoryInLocalStorage(searchInput);
+        navigate(`../searchpage/${searchInput}`);
+    }
+
+    const obj = {
+        ...searchState,
+        searchDispatch,
+        handleSearchpageOpen,
+    };
+
+    return <MusicLogic.Provider value={obj}>{children}</MusicLogic.Provider>;
 }
 
 function useMusicLogic() {

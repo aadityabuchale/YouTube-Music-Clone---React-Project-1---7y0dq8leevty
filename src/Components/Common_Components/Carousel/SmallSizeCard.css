@@ -2,8 +2,10 @@
     min-width: 350px;
     height: 50px;
     display: flex;
+    align-items: center;
     gap: 10px;
     margin-right: 15px;
+    padding: 3px 0 3px 5px;
     font-size: 15px;
     position: relative;
     transition: 0.4s cubic-bezier(0.19, 1, 0.22, 1);

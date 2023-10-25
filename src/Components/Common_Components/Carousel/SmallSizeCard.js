@@ -9,6 +9,7 @@ import ThumbDownAltOutlinedIcon from "@mui/icons-material/ThumbDownAltOutlined";
 import { getAlbumOrArtist } from "../../../ApiService";
 import { useMusicData } from "../../../Contexts/MusicDataProvider";
 import { useMusicLogic } from "../../../Contexts/MusicLogicsProvider";
+import { useNavigate } from "react-router-dom";
 
 function SmallSizeCard({
     song,
@@ -16,6 +17,7 @@ function SmallSizeCard({
     isProfileCard,
     isSearchCard,
     musicList,
+    isCurrentSong,
 }) {
     const { _id, thumbnail, title, artist, image, name, description, artists } =
         song;
@@ -24,6 +26,7 @@ function SmallSizeCard({
     const { setPlayerData, musicDispatch } = useMusic();
     const { isAlbum, albumArtistSongsList } = useMusicData();
     const { artistsResult, songsResult, albumsResult } = useMusicLogic();
+    const navigate = useNavigate();
 
     // Function to fetch data for a single ID
     async function fetchData(id) {
@@ -46,7 +49,7 @@ function SmallSizeCard({
             }
 
             if (artists) {
-                // Create an array of promises by mapping IDs to fetchData calls
+                // album has artists so using this check
                 artists.map((id) => fetchData(id));
             }
         }
@@ -59,24 +62,25 @@ function SmallSizeCard({
               fontSize: "16px",
               alignItems: "center",
               borderBottom: "0.5px solid #121",
-              marginBottom: "5px",
+
+              backgroundColor: isCurrentSong && "#1d1d1d",
           }
         : {
-              borderBottom: isSearchCard && "0.9px solid #121",
-              marginBottom: isSearchCard && "5px",
+              borderBottom: "0.9px solid #121",
+
+              backgroundColor: isCurrentSong && "#1d1d1d",
           };
 
     function handleCardClick() {
         musicDispatch({
-            type: "setMusicId",
-            payload: _id,
+            type: "setMusicList",
             songsList: isProfileCard
                 ? albumArtistSongsList
                 : isSearchCard
                 ? [[...artistsResult], [...songsResult], [...albumsResult]]
                 : musicList,
         });
-        musicDispatch({ type: "setMusicPlayer", payload: "active" });
+        navigate(`../musicPlayer/${_id}`);
     }
 
     return (

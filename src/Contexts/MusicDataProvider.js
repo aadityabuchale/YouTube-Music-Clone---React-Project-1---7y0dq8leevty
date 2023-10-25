@@ -6,7 +6,6 @@ import { getAlbumOrArtist, getMusic, getSongsByCategory } from "../ApiService";
 const MusicDataContext = createContext({});
 
 function MusicDataContextProvider({ children }) {
-    const [selectedNavItem, setSelectedNavItem] = useState("Home");
     const [allMusicData, setAllMusicData] = useState([]);
 
     //---------- fetching all music at initial level -------------
@@ -141,11 +140,10 @@ function MusicDataContextProvider({ children }) {
         albumArtistSongsList,
     } = albumArtistState;
 
+    // getting data from api
     useEffect(() => {
         let fetch = async () => {
             const data = await getAlbumOrArtist(albumArtistId, isAlbum);
-
-            // console.log(albumArtistId, data);
 
             albumArtistDispatch({
                 type: "setAlbumArtistData",
@@ -161,21 +159,34 @@ function MusicDataContextProvider({ children }) {
         fetch();
     }, [albumArtistId]);
 
+    // setting up initial states
+    function handleAlbumArtistPage(profileType, id) {
+        albumArtistDispatch({ type: "setAlbumArtistId", payload: id });
+        albumArtistDispatch({
+            type: "setAlbumArtistPage",
+            payload: "active",
+        });
+
+        if (profileType === "artist") {
+            albumArtistDispatch({ type: "setArtist" });
+        } else {
+            albumArtistDispatch({ type: "setAlbum" });
+        }
+    }
+
     // ----------- end of fetching album artists data ------------
 
     return (
         <MusicDataContext.Provider
             value={{
-                selectedNavItem,
-                setSelectedNavItem,
                 allMusicData,
                 setAllMusicData,
                 albumArtistDispatch,
                 albumArtistObject,
                 isAlbum,
                 albumArtistPage,
-                albumArtistId,
                 albumArtistSongsList,
+                handleAlbumArtistPage,
             }}
         >
             {children}

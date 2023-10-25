@@ -1,21 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useMusic } from "../Contexts/MusicPlayerProvider";
 
 const iconStyles = {
-    pointerEvents: "none",
     display: "inline",
     width: "28px",
     height: "28px",
 };
 
-const SpeakerIcon = ({ width, height }) => {
+const SpeakerIcon = ({ width, height, color }) => {
     return (
         <svg
             viewBox="0 0 24 24"
             preserveAspectRatio="xMidYMid meet"
             focusable="false"
-            className="style-scope tp-yt-iron-icon"
+            className="style-scope tp-yt-iron-icon speakerIcon"
             style={iconStyles}
-            fill="#909090"
+            fill={"#909090"}
         >
             <g className="style-scope tp-yt-iron-icon">
                 <path
@@ -27,15 +27,15 @@ const SpeakerIcon = ({ width, height }) => {
     );
 };
 
-const LoopIcon = ({ width, height }) => {
+const LoopIcon = ({ width, height, color }) => {
     return (
         <svg
             viewBox="0 0 24 24"
             preserveAspectRatio="xMidYMid meet"
             focusable="false"
-            className="style-scope tp-yt-iron-icon"
+            className="style-scope tp-yt-iron-icon loopIcon"
             style={iconStyles}
-            fill="#909090"
+            fill={color}
         >
             <g className="style-scope tp-yt-iron-icon">
                 <path
@@ -53,7 +53,7 @@ const ShuffleIcon = ({ color, width, height }) => {
             viewBox="0 0 24 24"
             preserveAspectRatio="xMidYMid meet"
             focusable="false"
-            className="style-scope tp-yt-iron-icon"
+            className="style-scope tp-yt-iron-icon shuffleIcon"
             style={iconStyles}
             fill={color}
         >
@@ -73,7 +73,7 @@ const ShareIcon = () => {
             viewBox="0 0 24 24"
             preserveAspectRatio="xMidYMid meet"
             focusable="false"
-            className="style-scope yt-icon"
+            className="style-scope yt-icon shareIcon"
             style={{
                 pointerEvents: "none",
                 display: "inline",

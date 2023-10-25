@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import "./Components.styles/MusicPlayerController.css";
 import { SpeakerIcon, LoopIcon, ShuffleIcon } from "../svgs/MusicPlayerSvgs";
 import { useMusic } from "../Contexts/MusicPlayerProvider";
@@ -17,7 +18,17 @@ import ThumbDownAltOutlinedIcon from "@mui/icons-material/ThumbDownAltOutlined";
 
 function MusicPlayerController() {
     // gettting data from context
-    const { musicId, musicStatus, musicDispatch, musicObject } = useMusic();
+    const {
+        musicId,
+        musicStatus,
+        musicDispatch,
+        musicObject,
+        isShuffle,
+        isLoop,
+        handlePlayerControls,
+        handleAdditionalSettings,
+    } = useMusic();
+
     const [audioUrl, setAudioUrl] = useState(
         "https://newton-project-resume-backend.s3.amazonaws.com/audio/64cf94e447ae38c3e33a7253.mp3"
     );
@@ -33,10 +44,39 @@ function MusicPlayerController() {
     const [remainingMin, setRemainingMin] = useState(0);
     const [remainaingSec, setRemainingSec] = useState(0);
     const [playPercent, setPlayPercent] = useState(0);
-    const [isReady, setIsReady] = useState(false);
 
-    const [isLoop, setIsLoop] = useState(false);
-    const [isShuffle, setIsShuffle] = useState(false);
+    // ----------------- handlers ------------------------------
+
+    function handleAdditionalClick(e) {
+        handleAdditionalSettings(e);
+
+        if (e.target.classList.contains("downArrowIcon")) {
+            handleMusicStop();
+        }
+    }
+
+    function handlePrevClick() {
+        handlePlayerControls("prev");
+    }
+
+    function handleNextClick() {
+        handlePlayerControls("next");
+    }
+
+    function handleMusicPause() {
+        musicDispatch({ type: "pause" });
+    }
+
+    function handleMusicPlay() {
+        musicDispatch({ type: "play" });
+    }
+
+    function handleMusicStop() {
+        stop();
+        musicDispatch({ type: "stop" });
+    }
+
+    // ------------------ playing the music --------------------
 
     // using use-sound hook
     const [play, { duration, pause, stop, sound }] = useSound(audioUrl, {
@@ -50,7 +90,7 @@ function MusicPlayerController() {
     // console.log(duration, audioUrl, title);
 
     useEffect(() => {
-        setAudioUrl(() => audio_url);
+        setAudioUrl(audio_url);
     }, [audio_url]);
 
     // for handling current song when different song clicked
@@ -131,41 +171,8 @@ function MusicPlayerController() {
                         // if loop is on
                         if (isLoop) {
                             play();
-                        }
-
-                        // if nextId is present
-                        else if (nextId) {
-                            dispatchPlayer({ type: "playNext" });
-                        }
-
-                        // shuffling is clicked
-                        else if (isShuffle && songsIds.length > 1) {
-                            // logic for shuffling the songs
-                            let current = Math.floor(
-                                Math.random() * songsIds.length
-                            );
-                            while (current === playIdx) {
-                                current = Math.floor(
-                                    Math.random() * songsIds.length
-                                );
-                            }
-
-                            dispatchPlayer({
-                                type: "ChangeSong",
-                                payload: current,
-                            });
-                        }
-                        // we are in between the lists
-                        else if (
-                            songsIds.length > 1 &&
-                            playIdx < songsIds.length - 1
-                        ) {
-                            dispatchPlayer({
-                                type: "ChangeSong",
-                                payload: playIdx + 1,
-                            });
                         } else {
-                            dispatchPlayer({ type: "Play", payload: false });
+                            handlePlayerControls("next");
                         }
                     } else {
                         remainaingSec;
@@ -183,33 +190,22 @@ function MusicPlayerController() {
         return () => {
             clearTimeout(timer);
         };
-    }, [remainaingSec, isReady, musicStatus]);
+    }, [remainaingSec, isCapable, musicStatus]);
 
     //icon styles
     const iconStyles = {
-        pointerEvents: "none",
         display: "inline",
         fontSize: "30px",
+        ":active": {
+            scale: "1.2",
+        },
     };
 
-    function handleMusicPause() {
-        musicDispatch({ type: "pause" });
-    }
-
-    function handleMusicPlay() {
-        musicDispatch({ type: "play" });
-    }
-
-    function handleMusicStop() {
-        stop();
-        musicDispatch({ type: "stop" });
-    }
-
-    return (
+    return createPortal(
         <section className="controller-container">
             {/* left side controls */}
             <div className="player-controls">
-                <SkipPreviousIcon sx={iconStyles} />
+                <SkipPreviousIcon sx={iconStyles} onClick={handlePrevClick} />
 
                 {/* handling play pause button */}
                 {musicStatus === "pause" ? (
@@ -224,9 +220,14 @@ function MusicPlayerController() {
                     />
                 )}
 
-                <SkipNextIcon sx={iconStyles} />
+                <SkipNextIcon sx={iconStyles} onClick={handleNextClick} />
+
                 <div className="music-duration">
-                    <span>{currSec}</span>/ <span>{remainaingSec}</span>
+                    <span>
+                        {currMin <= 9 ? "0" + currMin : currMin}:
+                        {currSec <= 9 ? "0" + currSec : currSec}
+                    </span>
+                    / <span>{duration / 1000}</span>
                 </div>
             </div>
 
@@ -247,13 +248,17 @@ function MusicPlayerController() {
             )}
 
             {/* right side icons */}
-            <div className="additional-controls">
-                <SpeakerIcon />
-                <LoopIcon />
-                <ShuffleIcon color={"#909090"} />
-                <ArrowDropDownIcon sx={iconStyles} />
+            <div
+                className="additional-controls"
+                onClick={handleAdditionalClick}
+            >
+                <SpeakerIcon color={"#909090"} />
+                <LoopIcon color={isLoop ? "#ffffff" : "#909090"} />
+                <ShuffleIcon color={isShuffle ? "#ffffff" : "#909090"} />
+                <ArrowDropDownIcon sx={iconStyles} className="downArrowIcon" />
             </div>
-        </section>
+        </section>,
+        document.querySelector(".music-player-controller")
     );
 }
 

@@ -3,34 +3,33 @@ import "./SquareCard.css";
 import { useMusic } from "../../../Contexts/MusicPlayerProvider";
 import PlayArrowSharpIcon from "@mui/icons-material/PlayArrowSharp";
 import { useMusicData } from "../../../Contexts/MusicDataProvider";
+import { useNavigate } from "react-router-dom";
 
 function SquareCard(props) {
     const { _id, thumbnail, image, title, name, artist, artists, description } =
         props.song;
+    const navigate = useNavigate();
     const { musicDispatch } = useMusic();
     const { albumArtistDispatch } = useMusicData();
 
+    // square card is used for songs albums and artists so navigating accordingly
     function handleCardClick(e) {
-        if (name && thumbnail) {
+        if (title && thumbnail) {
+            //song click
             musicDispatch({
-                type: "setMusicId",
-                payload: _id,
+                type: "setMusicList",
                 songsList: props.musicList,
             });
-            musicDispatch({ type: "setMusicPlayer", payload: "active" });
+            navigate(`musicPlayer/${_id}`);
         } else {
-            albumArtistDispatch({ type: "setAlbumArtistId", payload: _id });
-
             if (artists) {
-                albumArtistDispatch({ type: "setAlbum" });
-            } else {
-                albumArtistDispatch({ type: "setArtist" });
+                // album click
+                navigate(`../playlist/${"album"}/${_id}`);
             }
-
-            albumArtistDispatch({
-                type: "setAlbumArtistPage",
-                payload: "active",
-            });
+            // artist click
+            else {
+                navigate(`../playlist/${"artist"}/${_id}`);
+            }
         }
     }
 

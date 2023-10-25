@@ -2,18 +2,19 @@ import React from "react";
 import "./RectangleCard.css";
 import PlayArrowSharpIcon from "@mui/icons-material/PlayArrowSharp";
 import { useMusic } from "../../../Contexts/MusicPlayerProvider";
+import { useNavigate } from "react-router-dom";
 
 function RectangleCard(props) {
     const { _id, thumbnail, title, artist } = props.song;
     const { musicDispatch } = useMusic();
+    const navigate = useNavigate();
 
     function handleOpenMusicPlayer() {
         musicDispatch({
-            type: "setMusicId",
-            payload: _id,
+            type: "setMusicList",
             songsList: props.musicList,
         });
-        musicDispatch({ type: "setMusicPlayer", payload: "active" });
+        navigate(`musicPlayer/${_id}`);
     }
 
     return (
