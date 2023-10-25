@@ -13,7 +13,7 @@ import { useMusic } from "../Contexts/MusicPlayerProvider";
 function Navbar() {
     const [navExpanded, setNavExpanded] = useState(true);
     const navigate = useNavigate();
-    const { handleMusicPlayer } = useMusic();
+    const { handleMusicPlayer, musicPlayer, musicController } = useMusic();
 
     // navarray which contains all components and current states
     const navArray = [
@@ -66,7 +66,10 @@ function Navbar() {
           };
 
     function handleNavbarClick() {
-        handleMusicPlayer("keepAsItIs", "inactive", "active");
+        if (musicPlayer === "active" && musicController === "active") {
+            handleMusicPlayer("keepAsItIs", "inactive", "active");
+        }
+
         navigate("/");
     }
 

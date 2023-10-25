@@ -3,10 +3,10 @@ import "./Components.styles/SearchResults.css";
 import { useMusicLogic } from "../Contexts/MusicLogicsProvider";
 
 import { HistoryIcon, DeleteIcon, SearchIcon } from "../svgs/SearchHistorySvgs";
-import addInLocalStorage from "../utils/addHistoryInLocalStorage";
 import deleteHistoryFromLocalStorage from "../utils/deleteHistoryFromLocalStorage";
 import getHistoryFromLocalStorage from "../utils/getHistoryFromLocaltorage";
 import { useNavigate } from "react-router-dom";
+import addHistoryInLocalStorage from "../utils/addHistoryInLocalStorage";
 
 function SearchResults() {
     const { songsResult, albumsResult, artistsResult, searchInput } =
@@ -83,14 +83,24 @@ function SingleSearchResult({ result, isHistory, history }) {
 
     // handling when search history is clicked
     function handleSearchResultClick(e) {
+        let searchValue = !history
+            ? result?.title
+                ? result?.title
+                : result?.name
+            : history;
+
         if (!e.target.classList.contains("showSearchResults")) {
             searchDispatch({ type: "setSearchResultBox", payload: "inactive" });
-            searchDispatch({ type: "setSearchInput", payload: history });
-        }
-        addInLocalStorage(searchInput);
-        searchDispatch({ type: "setSearchPage", payload: "active" });
+            searchDispatch({
+                type: "setSearchInput",
+                payload: searchValue,
+            });
 
-        navigate("../searchpage/" + history);
+            addHistoryInLocalStorage(searchValue);
+            navigate(`../searchpage/${searchValue}`);
+        }
+
+        searchDispatch({ type: "setSearchPage", payload: "active" });
     }
 
     function handleDeleteHistory() {

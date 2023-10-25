@@ -203,6 +203,13 @@ function MusicPlayerController() {
 
     return createPortal(
         <section className="controller-container">
+            <div className="music-progress">
+                <div
+                    className="progress"
+                    style={{ width: playPercent + "%" }}
+                ></div>
+            </div>
+
             {/* left side controls */}
             <div className="player-controls">
                 <SkipPreviousIcon sx={iconStyles} onClick={handlePrevClick} />

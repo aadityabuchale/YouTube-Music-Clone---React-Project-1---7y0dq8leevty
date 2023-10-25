@@ -1,63 +1,34 @@
 import React, { useContext, createRef, useState, useEffect } from "react";
 import { MusicDataContext } from "../../../Contexts/MusicDataProvider";
 import { getSongsByCategory } from "../../../ApiService";
-
-// mui imports
-import { Button } from "@mui/material";
-
+import { useNavigate } from "react-router-dom";
 import "./MusicCarousel.css";
 import RectangleCard from "./RectangleCard";
 import SquareCard from "./SquareCard";
 import SmallSizeCard from "./SmallSizeCard";
+import useMusicListToRender from "../../../hooks/useMusicListToRender";
+
+// mui imports
+import { Button } from "@mui/material";
 
 const MusicCarousel = ({ heading, musicType, cardType, isReverse }) => {
     const { allMusicData } = useContext(MusicDataContext);
-    const [musicListToRender, setMusicListToRender] = useState([]);
+    const navigate = useNavigate();
+    //custom hook
+    const [musicListToRender, setCardLimit] = useMusicListToRender(
+        musicType,
+        30
+    );
+
+    // ---------------------- scroll logic ---------------------
 
     const myRef = createRef();
 
-    function handleDataForRender(data) {
-        let tempData = [...data];
-
-        if (isReverse) {
-            setMusicListToRender(tempData.reverse());
-        } else {
-            setMusicListToRender(data);
-        }
-    }
-
     // finding the music list for rendering according to type
     useEffect(() => {
-        let musicMetaData = allMusicData.find(
-            (music) => music.action === musicType
-        );
-
         // if we get small sized card then we fetch more songs
         if (cardType === "smallSize") {
-            async function fetchSongsForSmallSizeCard() {
-                if (musicMetaData.mood) {
-                    let data = await getSongsByCategory(
-                        `${musicMetaData.type}?filter={"mood":"${musicMetaData.mood}&limt=50"}`
-                    );
-                    handleDataForRender(data);
-                } else if (musicMetaData.sort) {
-                    let data = await getSongsByCategory(
-                        `${musicMetaData?.type}?sort={"release":1}&limit=50`
-                    );
-                    handleDataForRender(data);
-                } else {
-                    let data = await getSongsByCategory(
-                        `${musicMetaData.type}?limit=50`
-                    );
-                    handleDataForRender(data);
-                }
-            }
-
-            musicMetaData !== undefined && fetchSongsForSmallSizeCard();
-        } else {
-            // othewise copy the original data to render
-            let data = musicMetaData?.data ? musicMetaData.data : [];
-            handleDataForRender(data);
+            setCardLimit(50);
         }
     }, [cardType, musicType, allMusicData]);
 
@@ -84,20 +55,27 @@ const MusicCarousel = ({ heading, musicType, cardType, isReverse }) => {
         }
     }
 
+    // -------------------- handlers -------------------------
+
     function handleLeftClick() {
         myRef.current.scrollBy({
-            left: -window.innerWidth + 300,
+            left: -window.innerWidth + 200,
             behavior: "smooth",
         });
     }
 
     function handleRightClick() {
         myRef.current.scrollBy({
-            left: window.innerWidth - 300,
+            left: window.innerWidth - 200,
             behavior: "smooth",
         });
     }
 
+    function handleShowAllClick() {
+        navigate(`/allsongs/${musicType}/${heading}`);
+    }
+
+    // ------------------- jsx --------------------
     return (
         <div className="carousel-container">
             <div className="carousel-heading">
@@ -119,8 +97,9 @@ const MusicCarousel = ({ heading, musicType, cardType, isReverse }) => {
                                 backgroundColor: "#282828",
                             },
                         }}
+                        onClick={handleShowAllClick}
                     >
-                        Play All
+                        Show All
                     </Button>
 
                     {/* button - left */}

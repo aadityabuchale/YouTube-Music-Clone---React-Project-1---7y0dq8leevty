@@ -5,25 +5,33 @@ import MusicDataContextProvider from "./Contexts/MusicDataProvider";
 import MusicLogicsProvider from "./Contexts/MusicLogicsProvider";
 import MusicPlayerProvider from "./Contexts/MusicPlayerProvider";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Home from "./Pages/Home";
-import Explore from "./Pages/Explore";
-import Library from "./Pages/Library";
-import Navbar from "./Components/Navbar";
-import Upgrade from "./Pages/Upgrade";
+import { Auth0Provider } from "@auth0/auth0-react";
+import MusicAuthProvider from "./Contexts/MusicAuthProvider";
 
 const App = () => {
     return (
-        <Router>
-            <MusicDataContextProvider>
-                <MusicLogicsProvider>
-                    <MusicPlayerProvider>
-                        <Routes>
-                            <Route path="*" element={<YoutubeMusic />} />
-                        </Routes>
-                    </MusicPlayerProvider>
-                </MusicLogicsProvider>
-            </MusicDataContextProvider>
-        </Router>
+        <Auth0Provider
+            domain="dev-tkuwxktzkqh4y7ok.us.auth0.com"
+            clientId="oLd3h6SFxFefSHPxmLx81abDLbUfA1ic"
+            redirectUri={window.location.origin}
+        >
+            <Router>
+                <MusicAuthProvider>
+                    <MusicDataContextProvider>
+                        <MusicLogicsProvider>
+                            <MusicPlayerProvider>
+                                <Routes>
+                                    <Route
+                                        path="*"
+                                        element={<YoutubeMusic />}
+                                    />
+                                </Routes>
+                            </MusicPlayerProvider>
+                        </MusicLogicsProvider>
+                    </MusicDataContextProvider>
+                </MusicAuthProvider>
+            </Router>
+        </Auth0Provider>
     );
 };
 

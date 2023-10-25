@@ -5,9 +5,9 @@ import PlayArrowSharpIcon from "@mui/icons-material/PlayArrowSharp";
 import { useMusicData } from "../../../Contexts/MusicDataProvider";
 import { useNavigate } from "react-router-dom";
 
-function SquareCard(props) {
+function SquareCard({ song, musicList, allMusicCard }) {
     const { _id, thumbnail, image, title, name, artist, artists, description } =
-        props.song;
+        song;
     const navigate = useNavigate();
     const { musicDispatch } = useMusic();
     const { albumArtistDispatch } = useMusicData();
@@ -18,7 +18,7 @@ function SquareCard(props) {
             //song click
             musicDispatch({
                 type: "setMusicList",
-                songsList: props.musicList,
+                songsList: musicList,
             });
             navigate(`musicPlayer/${_id}`);
         } else {
@@ -36,8 +36,14 @@ function SquareCard(props) {
     return (
         <div
             key={_id}
-            className="music-card"
+            className={`music-card ${allMusicCard ? "hovered-card" : ""}`}
             onClick={(e) => handleCardClick(e)}
+            style={{
+                borderRadius: allMusicCard && "5px",
+                padding: allMusicCard && "5px",
+                width: allMusicCard && "200px",
+                height: allMusicCard && "250px",
+            }}
         >
             <div className="image">
                 <div className="play-btn-bg">

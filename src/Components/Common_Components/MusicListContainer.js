@@ -4,6 +4,9 @@ import SmallSizeCard from "./Carousel/SmallSizeCard";
 import LargeSizeButton from "./LargeSizeButton";
 
 function MusicListContainer({ heading, musicList, isSearchList, musicType }) {
+    // adding features and buttons according to containerstype
+    //if it is search container then show more show less icons there
+
     const [listCount, setListCount] = useState(isSearchList ? 5 : 20);
 
     return (
@@ -19,9 +22,9 @@ function MusicListContainer({ heading, musicList, isSearchList, musicType }) {
                             key={song._id}
                             song={song}
                             count={idx + 1}
-                            isProfileCard="true"
+                            isProfileCard={!isSearchList}
                             musicType={musicType}
-                            isSearchCard={true}
+                            isSearchCard={isSearchList}
                         />
                     );
                 })}

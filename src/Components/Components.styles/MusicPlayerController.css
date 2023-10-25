@@ -71,3 +71,17 @@
     display: flex;
     gap: 22px;
 }
+
+.music-progress {
+    width: 100%;
+    height: 2.7px;
+    background-color: #555555;
+    position: absolute;
+    top: 0;
+}
+
+.progress {
+    height: 100%;
+    position: absolute;
+    background-color: red;
+}

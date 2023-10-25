@@ -23,7 +23,7 @@ function SmallSizeCard({
         song;
 
     const [artistNames, setArtistNames] = useState([]);
-    const { setPlayerData, musicDispatch } = useMusic();
+    const { musicDispatch } = useMusic();
     const { isAlbum, albumArtistSongsList } = useMusicData();
     const { artistsResult, songsResult, albumsResult } = useMusicLogic();
     const navigate = useNavigate();
@@ -42,18 +42,16 @@ function SmallSizeCard({
 
     // Iterate over IDs and fetch data for each ID
     useEffect(() => {
-        if (isSearchCard) {
-            if (artist) {
-                // Create an array of promises by mapping IDs to fetchData calls
-                artist.map((id) => fetchData(id));
-            }
-
-            if (artists) {
-                // album has artists so using this check
-                artists.map((id) => fetchData(id));
-            }
+        if (artist && typeof artist[0] == "string") {
+            // Create an array of promises by mapping IDs to fetchData calls
+            artist.map((id) => fetchData(id));
         }
-    }, [artist, artists, isSearchCard]);
+
+        if (artists && typeof artists[0] == "string") {
+            // album has artists so using this check
+            artists.map((id) => fetchData(id));
+        }
+    }, [artist, artists]);
 
     // setting styles conditionalliy according to card type we want for searchpage and for album or artist page card
     const musicCardStyles = isSearchCard
@@ -77,7 +75,7 @@ function SmallSizeCard({
             songsList: isProfileCard
                 ? albumArtistSongsList
                 : isSearchCard
-                ? [[...artistsResult], [...songsResult], [...albumsResult]]
+                ? [...songsResult, ...albumsResult]
                 : musicList,
         });
         navigate(`../musicPlayer/${_id}`);
@@ -111,7 +109,10 @@ function SmallSizeCard({
                 </div>
             )}
 
-            <div className="hover-icons">
+            <div
+                className="hover-icons"
+                style={{ backgroundColor: isCurrentSong && "#1d1d1d" }}
+            >
                 {!isSearchCard && <ThumbUpOffAltOutlinedIcon />}
                 {!isSearchCard && <ThumbDownAltOutlinedIcon />}
                 <MoreVertOutlinedIcon />

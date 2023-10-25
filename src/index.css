@@ -39,3 +39,10 @@ body {
     font-size: 2vmax;
     margin: 15px 0;
 }
+
+.main-heading {
+    font-family: "yt-sans-bold";
+    font-weight: bold;
+    font-size: 3.2vmax;
+    margin: 15px 0;
+}

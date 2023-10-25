@@ -58,7 +58,6 @@ const HistoryIcon = () => {
             focusable="false"
             className="style-scope tp-yt-iron-icon showSearchResults"
             style={{
-                pointerEvents: "none",
                 display: "block",
                 width: "100%",
                 height: "100%",

@@ -6,8 +6,6 @@ import { useMusic } from "../Contexts/MusicPlayerProvider";
 function MusicPlayerQueue() {
     const { musicPlayerSongsList, musicObject } = useMusic();
 
-    // console.log(musicPlayerSongsList);
-
     return (
         <section className="music-queue-section">
             <div className="queue-heading">Up Next</div>

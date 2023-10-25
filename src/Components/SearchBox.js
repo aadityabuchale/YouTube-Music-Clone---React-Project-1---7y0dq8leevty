@@ -3,7 +3,6 @@ import { useMusicLogic } from "../Contexts/MusicLogicsProvider";
 import SearchSharpIcon from "@mui/icons-material/SearchSharp";
 import SearchResults from "./SearchResults";
 import "./Components.styles/SearchBox.css";
-import addInLocalStorage from "../utils/addHistoryInLocalStorage";
 
 function SearchBox() {
     const {

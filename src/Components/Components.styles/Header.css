@@ -15,14 +15,14 @@
     /* border-bottom: 0.3px solid #292929; */
 }
 
-.header-3 {
+.header-login {
     display: flex;
-    gap: 1.5rem;
-    text-align: center;
+    width: 70px;
+    justify-content: space-between;
+    align-items: center;
+    /* background-color: red; */
 }
 
 .screencast-icon {
-    color: white;
-    margin-top: 3px;
-    font-size: 14px;
+    font-size: 16px;
 }

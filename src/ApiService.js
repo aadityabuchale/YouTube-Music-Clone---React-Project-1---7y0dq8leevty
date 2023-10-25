@@ -11,6 +11,9 @@ async function getSongsByCategory(endUrl) {
                 projectId: PROJECT_ID,
             },
         });
+
+        // console.log(result.data.data);
+
         return result.data.data;
     } catch (err) {
         return console.log(err);
@@ -78,5 +81,26 @@ async function getSearchResult(input, type) {
         console.log(err);
     }
 }
+
+function setUserDetails() {
+    fetch("https://academics.newtonschool.co/api/v1/user/login", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            projectId: "7y0dq8leevty",
+        },
+        body: JSON.stringify({
+            email: "dwfef@3224",
+            password: "password",
+            appType: "music",
+        }),
+    })
+        .then((response) => response.json())
+        .then((result) => {
+            console.log(result);
+        });
+}
+
+setUserDetails();
 
 export { getSongsByCategory, getMusic, getAlbumOrArtist, getSearchResult };
